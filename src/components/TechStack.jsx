@@ -37,7 +37,6 @@ const getTechConfig = (name) => {
     if (norm.includes("postgres")) return { icon: SiPostgresql, color: "#4169E1" };
     if (norm.includes("docker")) return { icon: SiDocker, color: "#2496ED" };
     if (norm.includes("git")) return { icon: SiGit, color: "#F05032" };
-    if (norm.includes("neo4j")) return { icon: Database, color: "#008CC1" };
 
     return { icon: Cpu, color: "#CCCCCC" };
 };

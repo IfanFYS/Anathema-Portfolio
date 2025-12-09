@@ -66,7 +66,7 @@ export const projects = [
         slug: "noir-monitoring",
         title: "NOIR Monitoring",
         desc: "Embedded monitoring system implementation using AVR Assembly.",
-        stack: "Arduino,AVR Assembly, Proteus",
+        stack: "Arduino, AVR Assembly, Proteus",
         tag: "Embedded",
         color: "#FF0000", // Red
         images: ["noir-monitoring-1.png", "noir-monitoring-2.png"]
