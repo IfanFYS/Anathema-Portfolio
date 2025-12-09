@@ -1,0 +1,66 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.jsx";
+import TechStack from "../components/TechStack.jsx";
+import ProjectCard from "../components/ProjectCard.jsx";
+import Experience from "../components/Experience.jsx";
+import Education from "../components/Education.jsx";
+import Footer from "../components/Footer.jsx";
+import { projects } from "../data/projects.js";
+---
+
+<Layout title="Fathan Yazid Satriani | Portfolio">
+	<main class="bg-black mix-blend-screen relative">
+		{/* Anchor for Home */}
+		<div id="home" class="absolute top-0"></div>
+
+		<Hero client:load />
+
+		<section id="experience">
+			<Experience client:only="react" />
+		</section>
+
+		<Education client:only="react" />
+
+		<TechStack client:visible />
+
+		<section id="projects" class="py-20 px-4 relative">
+			<div class="max-w-7xl mx-auto">
+				<div class="text-center mb-16">
+					<span
+						class="text-[#39FF14] font-mono text-sm font-bold tracking-widest uppercase mb-4 block animate-pulse"
+					>
+						&lt; SYSTEM_PROJECTS /&gt;
+					</span>
+					<h2
+						class="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white"
+					>
+						<span
+							class="text-transparent bg-clip-text bg-linear-to-r from-[#00FFFF] to-[#FF00FF]"
+						>
+							Featured Operations
+						</span>
+					</h2>
+				</div>
+
+				<div
+					class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+				>
+					{
+						projects.map((project, index) => (
+							<ProjectCard
+								client:visible
+								{...project}
+								key={index}
+							/>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<section id="contact">
+			<Footer client:visible />
+		</section>
+	</main>
+</Layout>
