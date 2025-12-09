@@ -56,7 +56,7 @@ const skills = [
     },
     {
         category: "Tools",
-        items: ["Figma", "PostgreSQL", "Docker", "Git", "Neo4j"]
+        items: ["Figma", "PostgreSQL", "Docker", "Git"]
     },
 ];
 
