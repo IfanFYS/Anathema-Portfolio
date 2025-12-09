@@ -3,7 +3,7 @@ export const projects = [
         slug: "wiki-scrolls",
         title: "WikiScrolls App",
         desc: "TikTok-style educational video platform transforming Wikipedia articles into audiovisual content using AI.",
-        stack: "Flutter, Go (Gin), Docker, Neo4j, LLM",
+        stack: "Flutter, Typescript, Go, Docker, Neo4j, LLM",
         tag: "Flagship App",
         color: "#00FFFF", // Cyan
         images: ["wiki-scrolls.png"]
@@ -21,7 +21,7 @@ export const projects = [
         slug: "draw-battle-game",
         title: "Draw Battle Game",
         desc: "Real-time multiplayer drawing and guessing game with live socket connections.",
-        stack: "React, Vite, PostgreSQL, Socket.io",
+        stack: "React, Vite, MongoDB, Socket.io",
         tag: "Fullstack Game",
         color: "#BC13FE", // Purple
         images: ["draw-battle-game.png"]
@@ -30,7 +30,7 @@ export const projects = [
         slug: "custom-linux-shell",
         title: "Custom Linux Shell",
         desc: "A functional CLI shell developed in C with process management and piping.",
-        stack: "C, Linux API",
+        stack: "C, WSL",
         tag: "System",
         color: "#39FF14", // Green
         images: ["custom-linux-shell.png"]
@@ -48,7 +48,7 @@ export const projects = [
         slug: "network-design-sim",
         title: "Network Design & Sim",
         desc: "Complex OSPF network infrastructure design and simulation.",
-        stack: "Cisco Packet Tracer, OSPF",
+        stack: "Cisco Packet Tracer",
         tag: "Network",
         color: "#0099FF", // Blue
         images: ["network-design-sim-1.png", "network-design-sim-2.png"]
@@ -57,7 +57,7 @@ export const projects = [
         slug: "smart-drop-box",
         title: "Smart Drop-Box",
         desc: "IoT-enabled drop box system with real-time notifications.",
-        stack: "ESP32, FreeRTOS, Blynk",
+        stack: "ESP32, FreeRTOS, Blynk, C++",
         tag: "IoT",
         color: "#FF9900", // Orange
         images: ["smart-drop-box-1.png", "smart-drop-box-2.png"]
@@ -66,7 +66,7 @@ export const projects = [
         slug: "noir-monitoring",
         title: "NOIR Monitoring",
         desc: "Embedded monitoring system implementation using AVR Assembly.",
-        stack: "AVR Assembly, Proteus",
+        stack: "Arduino,AVR Assembly, Proteus",
         tag: "Embedded",
         color: "#FF0000", // Red
         images: ["noir-monitoring-1.png", "noir-monitoring-2.png"]
