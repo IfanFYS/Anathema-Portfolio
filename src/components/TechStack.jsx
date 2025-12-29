@@ -3,7 +3,7 @@ import {
     SiCplusplus, SiPython, SiTypescript, SiGo,
     SiReact, SiNextdotjs, SiAstro, SiTailwindcss, SiExpress, SiFastapi, SiDjango, SiFlutter,
     SiArduino, SiLinux,
-    SiFigma, SiPostgresql, SiDocker, SiGit
+    SiFigma, SiPostgresql, SiDocker, SiGit, SiGithub
 } from "react-icons/si";
 import { FaJava } from "react-icons/fa";
 import { TbBrandCSharp } from "react-icons/tb";
@@ -12,6 +12,11 @@ import { Cpu, Database } from "lucide-react"; // Fallback for VHDL/Hardware if n
 // Helper to get icon
 const getTechConfig = (name) => {
     const norm = name.toLowerCase();
+
+    // Specific checks first to avoid partial matches
+    if (norm.includes("django")) return { icon: SiDjango, color: "#092E20" };
+    if (norm.includes("github")) return { icon: SiGithub, color: "#FFFFFF" };
+
     if (norm.includes("c++") || norm === "c") return { icon: SiCplusplus, color: "#00599C" };
     if (norm.includes("python")) return { icon: SiPython, color: "#3776AB" };
     if (norm.includes("java")) return { icon: FaJava, color: "#007396" };
@@ -25,7 +30,6 @@ const getTechConfig = (name) => {
     if (norm.includes("tailwind")) return { icon: SiTailwindcss, color: "#06B6D4" };
     if (norm.includes("express")) return { icon: SiExpress, color: "#FFFFFF" }; // Express default often white/black
     if (norm.includes("fastapi")) return { icon: SiFastapi, color: "#009688" };
-    if (norm.includes("django")) return { icon: SiDjango, color: "#092E20" };
     if (norm.includes("flutter")) return { icon: SiFlutter, color: "#02569B" };
 
     if (norm.includes("arduino")) return { icon: SiArduino, color: "#00979D" };
@@ -44,19 +48,19 @@ const getTechConfig = (name) => {
 const skills = [
     {
         category: "Languages",
-        items: ["C/C++", "Python", "Java", "C#", "TypeScript", "Go"]
+        items: ["C/C++", "Python", "Java", "C#", "TypeScript", "Go", "Flutter"]
     },
     {
-        category: "Web Dev",
-        items: ["React", "Next.js", "Astro", "Tailwind", "Express.js", "FastAPI", "Django", "Flutter"]
+        category: "Frameworks",
+        items: ["React", "Next.js", "Astro", "Tailwind", "Express.js", "FastAPI", "Django"]
     },
     {
-        category: "Hardware/IoT",
+        category: "Embedded/IoT",
         items: ["Arduino", "ESP32", "Linux", "VHDL"]
     },
     {
-        category: "Tools",
-        items: ["Figma", "PostgreSQL", "Docker", "Git"]
+        category: "Other Tools",
+        items: ["Figma", "PostgreSQL", "Docker", "Git", "GitHub"]
     },
 ];
 

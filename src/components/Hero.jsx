@@ -53,10 +53,10 @@ const Hero = () => {
                             <TypeAnimation
                                 sequence={[
                                     () => setTextColor('text-[#FFFF00]'), // Yellow for UI
-                                    '> 3RD YEAR COMPUTER ENGINEERING STUDENT\n@ UNIVERSITAS INDONESIA',
+                                    '> 3RD YEAR COMPUTER ENGINEERING \n@ UNIVERSITAS INDONESIA',
                                     2000,
                                     () => setTextColor('text-[#00FFFF]'), // Cyan for Pharos
-                                    '> INCOMING IT INTERN\n@ PT. PHAROS INDONESIA',
+                                    '> AI & MECHATRONICS ENGINEER \n@ PT. PHAROS INDONESIA',
                                     2000
                                 ]}
                                 wrapper="span"
@@ -70,7 +70,7 @@ const Hero = () => {
                         <p className="text-slate-400 text-lg md:text-xl max-w-xl leading-relaxed font-sans mt-2">
                             Hi, I'm <strong className="text-white">Ifan</strong>. I'm a <strong className="text-white">20-year-old</strong> developer based in <strong className="text-white">South Jakarta</strong>.
                             I sit at the intersection of <strong className="text-[#00FFFF]">Software Engineering</strong>, <strong className="text-[#FF00FF]">Web Development</strong>, and <strong className="text-[#39FF14]">IoT/Embedded Systems</strong>,
-                            with a growing interest in <strong className="text-[#e6fe13]">Networking/Cybersecurity</strong>. When I'm not working, you can find me hitting the <strong className="text-white">gym</strong>, going on a <strong className="text-white">run</strong>, or <strong className="text-white">gaming</strong> with the boys.
+                            with a growing interest in <strong className="text-[#e6fe13]">Networking/Cybersecurity</strong>. Besides computers, my hobbies includehitting the <strong className="text-white">gym</strong>, going on a <strong className="text-white">run</strong>, and playing online <strong className="text-white">games</strong>.
                         </p>
 
                         {/* Mobile Buttons (Smaller & Below Bio) */}

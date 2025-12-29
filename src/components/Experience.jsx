@@ -4,13 +4,13 @@ import { motion } from "framer-motion";
 
 const experiences = [
     {
-        role: "Incoming IT Intern",
+        role: "AI & Mechatronics Intern",
         company: "PT. Pharos Indonesia",
         period: "Dec 2025 - Present",
         active: true,
         slug: "pharos",
         desc: [
-            "Upcoming internship focusing on IT infrastructure and software development within the pharmaceutical industry."
+            "First internship focusing on combining AI (Computer Vision) & IoT Systems application within the pharmaceutical industry."
         ]
     },
     {
@@ -20,7 +20,7 @@ const experiences = [
         active: false,
         slug: "physics-lab",
         desc: [
-            "Supervised 2 lab sessions per-week (Atwood Machine & Spring Oscillation modules)",
+            "Supervised 2 lab sessions per-week (Atwood Machine & Spring Oscillation modules).",
             "Collaborated with faculty to ensure safety compliance."
         ]
     },
