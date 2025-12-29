@@ -8,7 +8,7 @@ const experiences = [
         company: "PT. Pharos Indonesia",
         period: "Dec 2025 - Present",
         active: true,
-        slug: "pharos",
+        slug: "pharos-intern",
         desc: [
             "First internship focusing on combining AI (Computer Vision) & IoT Systems application within the pharmaceutical industry."
         ]
