@@ -120,7 +120,7 @@ const Hero = () => {
 
                             {/* The Image */}
                             <img
-                                src="/assets/profile.jpg"
+                                src="/assets/profile1.jpg"
                                 alt="Fathan Yazid Satriani"
                                 className={`w-full h-full object-cover rounded-2xl border-2 border-white/20 relative z-10 bg-zinc-900 shadow-2xl transition-all duration-500 ${isProfileHovered ? 'grayscale-0' : 'grayscale group-hover:grayscale-0'}`}
                             />
