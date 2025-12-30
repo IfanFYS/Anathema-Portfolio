@@ -49,7 +49,7 @@ const Hero = () => {
                         </h1>
 
                         {/* Typewriter Role */}
-                        <div className="text-lg md:text-2xl mb-8 font-mono min-h-[80px] flex items-start w-full justify-center lg:justify-start leading-relaxed">
+                        <div className="text-lg md:text-2xl font-mono min-h-[80px] flex items-start w-full justify-center lg:justify-start leading-relaxed">
                             <TypeAnimation
                                 sequence={[
                                     () => setTextColor('text-[#FFFF00]'), // Yellow for UI
@@ -68,9 +68,9 @@ const Hero = () => {
                         </div>
 
                         <p className="text-slate-400 text-lg md:text-xl max-w-xl leading-relaxed font-sans mt-2">
-                            Hi, I'm <strong className="text-white">Ifan</strong>. I'm a <strong className="text-white">20-year-old</strong> developer based in <strong className="text-white">South Jakarta</strong>.
+                            Hi There! My nickname is <strong className="text-white">Ifan</strong>. I'm a <strong className="text-white">20-year-old</strong> developer based in <strong className="text-white">South Jakarta</strong>.
                             I sit at the intersection of <strong className="text-[#00FFFF]">Software Engineering</strong> and <strong className="text-[#39FF14]">IoT/Embedded Systems</strong>,
-                            with a growing interest in <strong className="text-[#FF00FF]">Networking/Cybersecurity</strong>. Besides computers, my hobbies include hitting the <strong className="text-white">gym</strong>, going on a <strong className="text-white">run</strong>, and playing online <strong className="text-white">video games</strong>.
+                            with a growing interest in <strong className="text-[#FF00FF]">Networking/Cybersecurity</strong>.
                         </p>
 
                         {/* Mobile Buttons (Smaller & Below Bio) */}
