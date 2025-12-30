@@ -69,8 +69,8 @@ const Hero = () => {
 
                         <p className="text-slate-400 text-lg md:text-xl max-w-xl leading-relaxed font-sans mt-2">
                             Hi, I'm <strong className="text-white">Ifan</strong>. I'm a <strong className="text-white">20-year-old</strong> developer based in <strong className="text-white">South Jakarta</strong>.
-                            I sit at the intersection of <strong className="text-[#00FFFF]">Software Engineering</strong>, <strong className="text-[#FF00FF]">Web Development</strong>, and <strong className="text-[#39FF14]">IoT/Embedded Systems</strong>,
-                            with a growing interest in <strong className="text-[#e6fe13]">Networking/Cybersecurity</strong>. Besides computers, my hobbies includehitting the <strong className="text-white">gym</strong>, going on a <strong className="text-white">run</strong>, and playing online <strong className="text-white">games</strong>.
+                            I sit at the intersection of <strong className="text-[#00FFFF]">Software Engineering</strong> and <strong className="text-[#39FF14]">IoT/Embedded Systems</strong>,
+                            with a growing interest in <strong className="text-[#FF00FF]">Networking/Cybersecurity</strong>. Besides computers, my hobbies include hitting the <strong className="text-white">gym</strong>, going on a <strong className="text-white">run</strong>, and playing online <strong className="text-white">video games</strong>.
                         </p>
 
                         {/* Mobile Buttons (Smaller & Below Bio) */}
