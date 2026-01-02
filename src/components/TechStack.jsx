@@ -1,13 +1,18 @@
 import React from "react";
 import {
-    SiCplusplus, SiPython, SiTypescript, SiGo,
+    SiCplusplus, SiPython, SiTypescript, SiGo, SiJavascript, SiRust,
     SiReact, SiNextdotjs, SiAstro, SiTailwindcss, SiExpress, SiFastapi, SiDjango, SiFlutter,
-    SiArduino, SiLinux,
-    SiFigma, SiPostgresql, SiDocker, SiGit, SiGithub
+    SiNodedotjs, SiVuedotjs, SiSvelte, SiFlask,
+    SiArduino, SiLinux, SiRaspberrypi, SiPlatformio,
+    SiFigma, SiPostgresql, SiDocker, SiGit, SiGithub,
+    SiMongodb, SiRedis, SiVercel, SiAmazonwebservices, SiFirebase,
+    SiJira, SiNotion, SiPostman, SiTrello, SiCanva, SiAdobephotoshop,
+    SiTensorflow, SiPytorch, SiOpencv
 } from "react-icons/si";
+import { VscCode } from "react-icons/vsc";
 import { FaJava } from "react-icons/fa";
-import { TbBrandCSharp } from "react-icons/tb";
-import { Cpu, Database } from "lucide-react"; // Fallback for VHDL/Hardware if needed
+import { TbBrandCSharp, TbSql } from "react-icons/tb";
+import { Cpu, Database, Brain } from "lucide-react"; // Fallback for VHDL/Hardware/AI if needed
 
 // Helper to get icon
 const getTechConfig = (name) => {
@@ -16,31 +21,65 @@ const getTechConfig = (name) => {
     // Specific checks first to avoid partial matches
     if (norm.includes("django")) return { icon: SiDjango, color: "#092E20" };
     if (norm.includes("github")) return { icon: SiGithub, color: "#FFFFFF" };
+    if (norm.includes("typescript")) return { icon: SiTypescript, color: "#3178C6" };
+    if (norm.includes("javascript")) return { icon: SiJavascript, color: "#F7DF1E" };
+    if (norm.includes("postgres")) return { icon: SiPostgresql, color: "#4169E1" }; // Before "sql"
+    if (norm.includes("mongodb")) return { icon: SiMongodb, color: "#47A248" }; // Before "go"
 
+    // Languages
     if (norm.includes("c++") || norm === "c") return { icon: SiCplusplus, color: "#00599C" };
     if (norm.includes("python")) return { icon: SiPython, color: "#3776AB" };
     if (norm.includes("java")) return { icon: FaJava, color: "#007396" };
     if (norm.includes("c#")) return { icon: TbBrandCSharp, color: "#239120" };
-    if (norm.includes("typescript")) return { icon: SiTypescript, color: "#3178C6" };
     if (norm.includes("go")) return { icon: SiGo, color: "#00ADD8" };
+    if (norm.includes("rust")) return { icon: SiRust, color: "#DEA584" };
+    if (norm.includes("sql")) return { icon: TbSql, color: "#4479A1" };
 
+    // Frameworks
     if (norm.includes("react")) return { icon: SiReact, color: "#61DAFB" };
     if (norm.includes("next")) return { icon: SiNextdotjs, color: "#FFFFFF" };
     if (norm.includes("astro")) return { icon: SiAstro, color: "#BC52EE" };
     if (norm.includes("tailwind")) return { icon: SiTailwindcss, color: "#06B6D4" };
-    if (norm.includes("express")) return { icon: SiExpress, color: "#FFFFFF" }; // Express default often white/black
+    if (norm.includes("express")) return { icon: SiExpress, color: "#FFFFFF" };
     if (norm.includes("fastapi")) return { icon: SiFastapi, color: "#009688" };
     if (norm.includes("flutter")) return { icon: SiFlutter, color: "#02569B" };
+    if (norm.includes("node")) return { icon: SiNodedotjs, color: "#339933" };
+    if (norm.includes("vue")) return { icon: SiVuedotjs, color: "#4FC08D" };
+    if (norm.includes("svelte")) return { icon: SiSvelte, color: "#FF3E00" };
+    if (norm.includes("flask")) return { icon: SiFlask, color: "#FFFFFF" };
 
+    // Embedded/IoT
     if (norm.includes("arduino")) return { icon: SiArduino, color: "#00979D" };
-    if (norm.includes("esp32")) return { icon: Cpu, color: "#E7352C" }; // Espressif/ESP32 using generic Cpu if icon fails
+    if (norm.includes("esp32")) return { icon: Cpu, color: "#E7352C" };
     if (norm.includes("linux")) return { icon: SiLinux, color: "#FCC624" };
-    if (norm.includes("vhdl")) return { icon: Cpu, color: "#555555" }; // Generic for VHDL
+    if (norm.includes("vhdl")) return { icon: Cpu, color: "#555555" };
+    if (norm.includes("raspberry")) return { icon: SiRaspberrypi, color: "#A22846" };
+    if (norm.includes("stm32")) return { icon: Cpu, color: "#03234B" };
+    if (norm.includes("platformio")) return { icon: SiPlatformio, color: "#FF7F00" };
 
+    // Design & Planning
     if (norm.includes("figma")) return { icon: SiFigma, color: "#F24E1E" };
-    if (norm.includes("postgres")) return { icon: SiPostgresql, color: "#4169E1" };
+    if (norm.includes("jira")) return { icon: SiJira, color: "#0052CC" };
+    if (norm.includes("notion")) return { icon: SiNotion, color: "#FFFFFF" };
+    if (norm.includes("trello")) return { icon: SiTrello, color: "#0052CC" };
+    if (norm.includes("canva")) return { icon: SiCanva, color: "#00C4CC" };
+    if (norm.includes("photoshop")) return { icon: SiAdobephotoshop, color: "#31A8FF" };
+
+    // DevOps & Tools
     if (norm.includes("docker")) return { icon: SiDocker, color: "#2496ED" };
     if (norm.includes("git")) return { icon: SiGit, color: "#F05032" };
+    if (norm.includes("redis")) return { icon: SiRedis, color: "#DC382D" };
+    if (norm.includes("vercel")) return { icon: SiVercel, color: "#FFFFFF" };
+    if (norm.includes("aws")) return { icon: SiAmazonwebservices, color: "#FF9900" };
+    if (norm.includes("firebase")) return { icon: SiFirebase, color: "#FFCA28" };
+    if (norm.includes("postman")) return { icon: SiPostman, color: "#FF6C37" };
+    if (norm.includes("vs code") || norm.includes("vscode")) return { icon: VscCode, color: "#007ACC" };
+
+    // AI/ML
+    if (norm.includes("tensorflow")) return { icon: SiTensorflow, color: "#FF6F00" };
+    if (norm.includes("pytorch")) return { icon: SiPytorch, color: "#EE4C2C" };
+    if (norm.includes("opencv")) return { icon: SiOpencv, color: "#5C3EE8" };
+    if (norm.includes("yolo")) return { icon: Brain, color: "#00FFFF" };
 
     return { icon: Cpu, color: "#CCCCCC" };
 };
@@ -48,19 +87,27 @@ const getTechConfig = (name) => {
 const skills = [
     {
         category: "Languages",
-        items: ["C/C++", "Python", "Java", "C#", "TypeScript", "Go", "Flutter"]
+        items: ["C/C++", "Python", "Java", "C#", "JavaScript", "TypeScript", "Go", "SQL"]
     },
     {
-        category: "Frameworks",
-        items: ["React", "Next.js", "Astro", "Tailwind", "Express.js", "FastAPI", "Django"]
+        category: "Web/Frameworks",
+        items: ["React", "Next.js", "Astro", "Tailwind", "Express.js", "FastAPI", "Django", "Node.js", "Vue.js", "Flutter"]
     },
     {
-        category: "Embedded/IoT",
-        items: ["Arduino", "ESP32", "Linux", "VHDL"]
+        category: "Hardware/IoT",
+        items: ["Arduino", "ESP32", "Raspberry Pi", "Linux", "VHDL", "PlatformIO"]
     },
     {
-        category: "Other Tools",
-        items: ["Figma", "PostgreSQL", "Docker", "Git", "GitHub"]
+        category: "Design & Planning",
+        items: ["Figma", "Canva", "Photoshop", "Jira", "Notion", "Trello"]
+    },
+    {
+        category: "DevOps & Tools",
+        items: ["PostgreSQL", "MongoDB", "Redis", "Docker", "Git", "Vercel", "AWS", "Postman"]
+    },
+    {
+        category: "AI/ML",
+        items: ["TensorFlow", "PyTorch", "OpenCV", "YOLO"]
     },
 ];
 
