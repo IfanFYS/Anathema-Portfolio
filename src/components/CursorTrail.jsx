@@ -87,7 +87,7 @@ const CursorTrail = () => {
         };
     }, []);
 
-    return <canvas ref={canvasRef} className="fixed inset-0 z-50 pointer-events-none" />;
+    return <canvas ref={canvasRef} className="hidden md:block fixed inset-0 z-50 pointer-events-none" />;
 };
 
 export default CursorTrail;
