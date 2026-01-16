@@ -81,7 +81,7 @@ const Hero = () => {
                         {/* Mobile Buttons (Smaller & Below Bio) */}
                         <div className="flex flex-col w-full gap-4 lg:hidden mt-8">
                             <a
-                                href="/CV_ATS.pdf"
+                                href="/CV_ATS_FathanYazidSatriani.pdf"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="group relative px-6 py-3 bg-black text-[#00FFFF] border border-[#00FFFF] font-bold uppercase tracking-wider overflow-hidden hover:text-black transition-all duration-100 text-center active:scale-95 text-sm"
@@ -139,7 +139,7 @@ const Hero = () => {
                         {/* Desktop Buttons Stack (Hidden on Mobile) */}
                         <div className="hidden lg:flex flex-col w-full gap-4">
                             <a
-                                href="/CV_ATS.pdf"
+                                href="/CV_ATS_FathanYazidSatriani.pdf"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="group relative px-8 py-4 bg-black text-[#00FFFF] border border-[#00FFFF] font-bold uppercase tracking-wider overflow-hidden hover:text-black transition-all duration-100 text-center active:scale-95"

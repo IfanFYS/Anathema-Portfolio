@@ -8,7 +8,7 @@ const educationData = [
         school: "Universitas Indonesia",
         degree: "Bachelor of Computer Engineering",
         period: "Expected April 2027",
-        score: "GPA: 3.72 / 4.00",
+        score: "GPA: 3.75 / 4.00",
         color: "#FFD700" // Gold
     },
     {
@@ -16,7 +16,7 @@ const educationData = [
         school: "SMAN 34 Jakarta",
         degree: "Math and Sciences",
         period: "July 2020 – April 2023",
-        score: "Grade: 89 / 100",
+        score: "Grade: 90 / 100",
         color: "#00FFFF" // Cyan
     }
 ];
