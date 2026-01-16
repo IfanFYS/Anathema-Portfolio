@@ -57,7 +57,7 @@ const EducationCard = ({ data, delay }) => {
             </div>
 
             {/* School Logo Overlay */}
-            <div className="absolute top-48 left-6 -translate-y-1/2 w-16 h-16 z-30 bg-black border border-white/20 p-2 rounded-lg shadow-xl shadow-black/50">
+            <div className="absolute top-56 left-6 -translate-y-1/2 w-20 h-20 z-30 bg-black border border-white/20 p-2 rounded-lg shadow-xl shadow-black/50">
                 {!logoError ? (
                     <img
                         src={`/assets/logos/${data.slug}.png`}

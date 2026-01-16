@@ -4,13 +4,27 @@ import { motion } from "framer-motion";
 
 const experiences = [
     {
+        role: "Probation Intern (TEEP Program)",
+        company: "Broadband Multimedia Wireless (BMW) Lab",
+        period: "Jan 2026 - Present",
+        active: true,
+        slug: "bmw-ntust",
+        image: "/assets/experience/bmw-ntust.png",
+        desc: [
+            "Selected for the TEEP Internship probation period at the Broadband Multimedia Wireless (BMW) Lab, focusing on next-generation network architectures.",
+            "Conducting deep-dive analysis of Open RAN standards, specifically the integration of Service Management and Orchestration (SMO) with RAN Intelligent Controllers (RIC)."
+        ]
+    },
+    {
         role: "AI & Mechatronics Intern",
         company: "PT. Pharos Indonesia",
         period: "Dec 2025 - Present",
         active: true,
         slug: "pharos-intern",
+        image: "/assets/experience/pharos-intern.png",
         desc: [
-            "First internship focusing on combining AI (Computer Vision) & IoT Systems application within the pharmaceutical industry."
+            "Implemented an industrial automation solution integrating Python (PyQt5, OpenCV, Ultralytics YOLO), custom Arduino communication protocols (Talos), and real-time image processing for automated pharmaceutical packaging quality control.",
+            "Built a smart door access system using computer vision, biometric authentication, and embedded hardware to automate secure office entry through real-time facial recognition."
         ]
     },
     {
@@ -21,7 +35,7 @@ const experiences = [
         slug: "physics-lab",
         desc: [
             "Supervised 2 lab sessions per-week (Atwood Machine & Spring Oscillation modules).",
-            "Collaborated with faculty to ensure safety compliance."
+            "Collaborated with faculty to ensure lab safety and proper equipment usage."
         ]
     },
     {
@@ -61,7 +75,7 @@ const experiences = [
         company: "EXERCISE FTUI",
         period: "Oct 2023 - Dec 2023",
         active: false,
-        slug: "exercise",
+        slug: "exercise-2023",
         desc: [
             "Learned the basics of web development by doing hands-on exercises and assignments.",
             "Made my very first web portfolio using React.js & Tailwind CSS frameworks."
@@ -83,7 +97,7 @@ const ExperienceCard = ({ exp }) => {
             <div className="w-full aspect-video bg-zinc-900 mb-4 overflow-hidden relative">
                 <div className={`absolute inset-0 bg-[#00FFFF]/10 mix-blend-overlay z-10 transition-opacity ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
                 <img
-                    src={`/assets/experience/${exp.slug}.jpg`}
+                    src={exp.image || `/assets/experience/${exp.slug}.jpg`}
                     alt={exp.company}
                     className={`w-full h-full object-cover transition-all duration-500 ${isHovered ? 'grayscale-0' : 'grayscale'}`}
                     onError={(e) => {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Download, ArrowRight } from "lucide-react";
 import { TypeAnimation } from 'react-type-animation';
@@ -6,6 +6,18 @@ import { TypeAnimation } from 'react-type-animation';
 const Hero = () => {
     const [textColor, setTextColor] = useState('text-[#FFFF00]'); // Start with Yellow for UI
     const [isProfileHovered, setIsProfileHovered] = useState(false);
+
+    const sequence = useMemo(() => [
+        () => setTextColor('text-[#FFFF00]'), // Yellow for UI
+        '> 3RD YEAR COMPUTER ENGINEERING \n@ UNIVERSITAS INDONESIA',
+        2000,
+        () => setTextColor('text-[#39FF14]'), // Green for Pharos
+        '> AI & MECHATRONICS ENGINEER \n@ PT. PHAROS INDONESIA',
+        2000,
+        () => setTextColor('text-[#00FFFF]'), // Cyan for BMW
+        '> PROBATION RESEARCH INTERN \n@ BMW LAB NTUST',
+        2000
+    ], []);
 
     return (
         <section className="min-h-screen flex flex-col justify-center items-center text-center px-4 relative overflow-hidden pt-20 pb-10">
@@ -49,26 +61,19 @@ const Hero = () => {
                         </h1>
 
                         {/* Typewriter Role */}
-                        <div className="text-lg md:text-2xl font-mono min-h-[80px] flex items-start w-full justify-center lg:justify-start leading-relaxed">
+                        <div className={`text-lg md:text-2xl font-mono min-h-[80px] flex items-start w-full justify-center lg:justify-start leading-relaxed ${textColor} transition-colors duration-300`}>
                             <TypeAnimation
-                                sequence={[
-                                    () => setTextColor('text-[#FFFF00]'), // Yellow for UI
-                                    '> 3RD YEAR COMPUTER ENGINEERING \n@ UNIVERSITAS INDONESIA',
-                                    2000,
-                                    () => setTextColor('text-[#00FFFF]'), // Cyan for Pharos
-                                    '> AI & MECHATRONICS ENGINEER \n@ PT. PHAROS INDONESIA',
-                                    2000
-                                ]}
+                                sequence={sequence}
                                 wrapper="span"
                                 speed={50}
                                 repeat={Infinity}
                                 style={{ whiteSpace: 'pre-line', display: 'block' }}
-                                className={`font-bold uppercase tracking-wide ${textColor} transition-colors duration-300 block text-center lg:text-left first-line:text-white`}
+                                className="font-bold uppercase tracking-wide block text-center lg:text-left first-line:text-white"
                             />
                         </div>
 
                         <p className="text-slate-400 text-lg md:text-xl max-w-xl leading-relaxed font-sans mt-2">
-                            Hi There! My nickname is <strong className="text-white">Ifan</strong>. I'm a <strong className="text-white">20-year-old</strong> developer based in <strong className="text-white">South Jakarta</strong>.
+                            Hi There! My nickname is <strong className="text-white">Ifan</strong>. I'm a <strong className="text-white">20-year-old</strong> computer engineer based in <strong className="text-white">South Jakarta</strong>.
                             I sit at the intersection of <strong className="text-[#00FFFF]">Software Engineering</strong> and <strong className="text-[#39FF14]">IoT/Embedded Systems</strong>,
                             with a growing interest in <strong className="text-[#FF00FF]">Networking/Cybersecurity</strong>.
                         </p>
@@ -76,13 +81,14 @@ const Hero = () => {
                         {/* Mobile Buttons (Smaller & Below Bio) */}
                         <div className="flex flex-col w-full gap-4 lg:hidden mt-8">
                             <a
-                                href="/CV ATS Fathan Yazid Satriani.pdf"
+                                href="/CV_ATS.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="group relative px-6 py-3 bg-black text-[#00FFFF] border border-[#00FFFF] font-bold uppercase tracking-wider overflow-hidden hover:text-black transition-all duration-100 text-center active:scale-95 text-sm"
-                                download
                             >
                                 <span className="relative z-10 flex items-center justify-center gap-2 group-hover:text-black group-active:text-black transition-colors">
                                     <Download size={18} />
-                                    Download CV
+                                    View CV
                                 </span>
                                 <div className="absolute inset-0 bg-[#00FFFF] transform -translate-x-full group-hover:translate-x-0 group-active:translate-x-0 transition-transform duration-200 ease-out z-0" />
                                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 group-active:opacity-100 animate-pulse bg-[#00FFFF]/50 z-[-1]" />
@@ -133,13 +139,14 @@ const Hero = () => {
                         {/* Desktop Buttons Stack (Hidden on Mobile) */}
                         <div className="hidden lg:flex flex-col w-full gap-4">
                             <a
-                                href="/CV ATS Fathan Yazid Satriani.pdf"
+                                href="/CV_ATS.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="group relative px-8 py-4 bg-black text-[#00FFFF] border border-[#00FFFF] font-bold uppercase tracking-wider overflow-hidden hover:text-black transition-all duration-100 text-center active:scale-95"
-                                download
                             >
                                 <span className="relative z-10 flex items-center justify-center gap-2 group-hover:text-black group-active:text-black transition-colors">
                                     <Download size={20} />
-                                    Download CV
+                                    View CV
                                 </span>
                                 <div className="absolute inset-0 bg-[#00FFFF] transform -translate-x-full group-hover:translate-x-0 group-active:translate-x-0 transition-transform duration-200 ease-out z-0" />
                                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 group-active:opacity-100 animate-pulse bg-[#00FFFF]/50 z-[-1]" />
