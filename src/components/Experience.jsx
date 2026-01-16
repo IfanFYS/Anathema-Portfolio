@@ -145,7 +145,7 @@ const Experience = () => {
 
                 <div className="relative">
                     {/* Connecting Neon Line */}
-                    <div className="absolute left-[28px] md:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-[#00FFFF] via-[#FF00FF] to-[#39FF14] transform -translate-x-1/2 shadow-[0_0_10px_#FF00FF]" />
+                    <div className="absolute left-[28px] md:left-1/2 top-0 bottom-0 w-1 bg-linear-to-b from-[#00FFFF] via-[#FF00FF] to-[#39FF14] transform -translate-x-1/2 shadow-[0_0_10px_#FF00FF]" />
 
                     <div className="flex flex-col gap-16">
                         {experiences.map((exp, idx) => (

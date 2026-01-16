@@ -11,12 +11,15 @@ const Hero = () => {
         () => setTextColor('text-[#FFFF00]'), // Yellow for UI
         '> 3RD YEAR COMPUTER ENGINEERING \n@ UNIVERSITAS INDONESIA',
         2000,
+        '', // Ensure deletion finishes before color change
         () => setTextColor('text-[#39FF14]'), // Green for Pharos
         '> AI & MECHATRONICS ENGINEER \n@ PT. PHAROS INDONESIA',
         2000,
+        '',
         () => setTextColor('text-[#00FFFF]'), // Cyan for BMW
         '> PROBATION RESEARCH INTERN \n@ BMW LAB NTUST',
-        2000
+        2000,
+        ''
     ], []);
 
     return (
@@ -61,7 +64,8 @@ const Hero = () => {
                             <TypeAnimation
                                 sequence={sequence}
                                 wrapper="span"
-                                speed={50}
+                                speed={75}
+                                deletionSpeed={75}
                                 repeat={Infinity}
                                 style={{ whiteSpace: 'pre-line', display: 'block' }}
                                 className="font-bold uppercase tracking-wide block text-center lg:text-left first-line:text-white"
@@ -69,8 +73,8 @@ const Hero = () => {
                         </div>
 
                         <p className="text-white text-lg md:text-xl max-w-xl leading-relaxed font-sans mt-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
-                            Hi There! My nickname is <strong className="text-[#00FFFF]">Ifan</strong>. I'm a <strong className="text-[#FF00FF]">20-year-old</strong> computer engineer based in <strong className="text-[#39FF14]">South Jakarta</strong>.
-                            I sit at the intersection of <strong className="text-[#00FFFF]">Software Engineering</strong> and <strong className="text-[#39FF14]">IoT/Embedded Systems</strong>,
+                            Hi There! My nickname is <strong className="text-[#FF3131]">Ifan</strong>. I'm a <strong className="text-[#FF5F1F]">20-year-old</strong> computer engineer based in <strong className="text-[#FFFF00]">South Jakarta</strong>.
+                            I sit at the intersection of <strong className="text-[#39FF14]">Software Engineering</strong> and <strong className="text-[#00FFFF]">IoT/Embedded Systems</strong>,
                             with a growing interest in <strong className="text-[#FF00FF]">Networking/Cybersecurity</strong>.
                         </p>
 
@@ -118,7 +122,7 @@ const Hero = () => {
                             onMouseLeave={() => setIsProfileHovered(false)}
                         >
                             {/* Animated Neon Glow Behind */}
-                            <div className={`absolute inset-0 bg-gradient-to-tr from-[#00FFFF] via-[#FF00FF] to-[#39FF14] rounded-2xl blur-2xl animate-pulse transition-opacity duration-500 ${isProfileHovered ? 'opacity-100' : 'opacity-50 group-hover:opacity-100'}`} />
+                            <div className={`absolute inset-0 bg-linear-to-tr from-[#00FFFF] via-[#FF00FF] to-[#39FF14] rounded-2xl blur-2xl animate-pulse transition-opacity duration-500 ${isProfileHovered ? 'opacity-100' : 'opacity-50 group-hover:opacity-100'}`} />
 
                             {/* The Image */}
                             <img

@@ -13,7 +13,7 @@ const socialLinks = [
 const Footer = () => {
     return (
         <footer className="py-12 border-t border-zinc-900 bg-black relative">
-            <div className="absolute top-0 left-0 w-full h-[1px] bg-linear-to-r from-transparent via-[#00FFFF] to-transparent opacity-50" />
+            <div className="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-[#00FFFF] to-transparent opacity-50" />
 
             <div className="max-w-7xl mx-auto px-4 flex flex-col items-center">
                 <h3 className="text-2xl font-black mb-8 text-white uppercase tracking-widest">

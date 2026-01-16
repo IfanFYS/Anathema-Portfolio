@@ -137,7 +137,7 @@ const TechStack = () => {
                                             className="group flex flex-col items-center gap-3 cursor-pointer select-none active:scale-95 transition-transform"
                                         >
                                             <div
-                                                className="w-20 h-20 flex items-center justify-center bg-zinc-900 border border-zinc-800 rounded-xl group-hover:scale-110 group-active:scale-110 transition-transform duration-200 shadow-lg group-hover:shadow-[0_0_20px_var(--hover-shadow-color)] group-active:shadow-[0_0_20px_var(--hover-shadow-color)] group-hover:border-[var(--hover-shadow-color)] group-active:border-[var(--hover-shadow-color)]"
+                                                className="w-20 h-20 flex items-center justify-center bg-zinc-900 border border-zinc-800 rounded-xl group-hover:scale-110 group-active:scale-110 transition-transform duration-200 shadow-lg group-hover:shadow-[0_0_20px_var(--hover-shadow-color)] group-active:shadow-[0_0_20px_var(--hover-shadow-color)] group-hover:border-(--hover-shadow-color) group-active:border-(--hover-shadow-color)"
                                                 style={{
                                                     "--hover-shadow-color": color
                                                 }}

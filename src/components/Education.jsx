@@ -70,7 +70,7 @@ const EducationCard = ({ data, delay }) => {
                 )}
             </div>
 
-            <div className="p-6 pt-12 flex-grow flex flex-col items-start relative z-10 text-left">
+            <div className="p-6 pt-12 grow flex flex-col items-start relative z-10 text-left">
                 <h3 className={`text-2xl font-bold mb-1 transition-colors leading-tight ${isHovered ? 'text-[#00FFFF]' : 'text-white'}`}>
                     {data.school}
                 </h3>

@@ -28,7 +28,7 @@ const RetroBackground = () => {
         <div className="fixed inset-0 z-0 overflow-hidden bg-[#050510] pointer-events-none">
 
             {/* Stars / Noise layer */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-slate-900 via-[#050510] to-black opacity-80" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-slate-900 via-[#050510] to-black opacity-80" />
             <div className="absolute inset-0 opacity-20 bg-[url('/assets/noise.png')] mix-blend-overlay" />
 
             {/* The Sun - Darker & Less Bright */}
@@ -67,7 +67,7 @@ const RetroBackground = () => {
             <div className="absolute bottom-0 left-0 right-0 h-[50%] bg-[#050510] z-15" />
 
             {/* Moving Grid Floor */}
-            <div className="absolute bottom-[-50%] left-[-50%] right-[-50%] h-[100%] z-20 perspective-grid-container">
+            <div className="absolute bottom-[-50%] left-[-50%] right-[-50%] h-full z-20 perspective-grid-container">
                 <div className="w-full h-full bg-transparent border-t border-[#FF00FF]/50 grid-floor" />
             </div>
 
