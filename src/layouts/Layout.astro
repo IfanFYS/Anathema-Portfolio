@@ -1,5 +1,7 @@
 ---
 import "../styles/global.css";
+import CursorTrail from "../components/CursorTrail.jsx";
+import RetroBackground from "../components/RetroBackground.jsx";
 import Sidebar from "../components/Sidebar.jsx";
 
 interface Props {
@@ -34,21 +36,9 @@ const { title = "Ifan's Portfolio" } = Astro.props;
 		{/* Sidebar HUD */}
 		<Sidebar client:only="react" />
 
-		{/* Retro Grid Background */}
-		<div
-			class="fixed inset-0 z-0 opacity-20 pointer-events-none perspective-grid"
-		>
-			<div
-				class="absolute inset-0 bg-[linear-gradient(to_right,#333_1px,transparent_1px),linear-gradient(to_bottom,#333_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"
-			>
-			</div>
-		</div>
-
-		{/* CRT Scanline Overlay */}
-		<div
-			class="fixed inset-0 z-50 pointer-events-none bg-scanlines opacity-10"
-		>
-		</div>
+		{/* Visual FX */}
+		<CursorTrail client:only="react" />
+		<RetroBackground client:only="react" />
 
 		{
 			/* Main Content Wrapper - Push right for sidebar space on desktop, push down for topbar on mobile */
@@ -77,6 +67,10 @@ const { title = "Ifan's Portfolio" } = Astro.props;
 
 	body {
 		font-family: "Inter", sans-serif;
+	}
+
+	.text-shadow-glow {
+		filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
 	}
 
 	h1,

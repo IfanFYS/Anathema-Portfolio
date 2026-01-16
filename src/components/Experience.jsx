@@ -139,8 +139,8 @@ const Experience = () => {
     return (
         <section className="py-20 px-4 relative" id="experience">
             <div className="max-w-6xl mx-auto">
-                <h2 className="text-4xl md:text-6xl font-black mb-20 text-center uppercase tracking-tighter text-white">
-                    <span className="text-[#39FF14] text-shadow drop-shadow-[0_0_10px_rgba(57,255,20,0.5)]">Level Progression</span>
+                <h2 className="text-4xl md:text-6xl font-black mb-20 text-center uppercase tracking-tighter text-[#39FF14] drop-shadow-[0_0_15px_rgba(57,255,20,0.6)]">
+                    Level Progression
                 </h2>
 
                 <div className="relative">

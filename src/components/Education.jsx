@@ -35,7 +35,7 @@ const EducationCard = ({ data, delay }) => {
             onHoverStart={() => setIsHovered(true)}
             onHoverEnd={() => setIsHovered(false)}
             onTap={() => setIsHovered(!isHovered)}
-            className={`relative backdrop-blur-md border border-white/10 overflow-hidden group transition-all duration-300 flex flex-col h-full ${isHovered ? 'bg-white/10' : 'bg-white/5'}`}
+            className={`relative backdrop-blur-xl border border-white/10 overflow-hidden group transition-all duration-300 flex flex-col h-full ${isHovered ? 'bg-[#1a1a2e]' : 'bg-[#050510]/95'}`}
         >
             {/* Campus Photo Background / Header */}
             <div className="h-56 w-full relative overflow-hidden text-left">
@@ -97,10 +97,8 @@ const Education = () => {
     return (
         <section id="education" className="py-20 px-4">
             <div className="max-w-6xl mx-auto">
-                <h2 className="text-4xl md:text-6xl font-black mb-16 text-center uppercase tracking-tighter text-white">
-                    <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-500">
-                        Academic Archives
-                    </span>
+                <h2 className="text-4xl md:text-6xl font-black mb-16 text-center uppercase tracking-tighter text-[#FFFF00] drop-shadow-[0_0_15px_rgba(255,255,0,0.6)]">
+                    Academic Archives
                 </h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

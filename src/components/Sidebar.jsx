@@ -38,7 +38,7 @@ const Sidebar = () => {
         ">
             {/* Logo Area */}
             <div className="flex-shrink-0">
-                <h1 className="text-2xl font-black tracking-tighter">
+                <h1 className="text-2xl font-black tracking-tighter pr-1">
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00FFFF] via-[#FF00FF] to-[#39FF14]">
                         FYS
                     </span>

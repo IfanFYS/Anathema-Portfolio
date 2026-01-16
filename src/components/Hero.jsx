@@ -48,20 +48,16 @@ const Hero = () => {
                         transition={{ duration: 0.7 }}
                         className="flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-1 max-w-2xl"
                     >
-                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-6 tracking-tighter leading-none select-none">
-                            <span className="text-transparent bg-clip-text bg-linear-to-r from-[#00FFFF] via-[#FF00FF] to-[#39FF14] animate-gradient-x bg-300% drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">
-                                FATHAN
-                            </span>
+                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-6 tracking-tighter leading-none select-none text-white drop-shadow-[0_0_25px_rgba(255,255,255,0.5)]">
+                            FATHAN
                             <br />
-                            <span className="text-white drop-shadow-[0_5px_5px_rgba(0,0,0,1)]">YAZID</span>
+                            YAZID
                             <br />
-                            <span className="text-transparent bg-clip-text bg-linear-to-r from-[#BC13FE] to-[#00FFFF] bg-300%">
-                                SATRIANI
-                            </span>
+                            SATRIANI
                         </h1>
 
                         {/* Typewriter Role */}
-                        <div className={`text-lg md:text-2xl font-mono min-h-[80px] flex items-start w-full justify-center lg:justify-start leading-relaxed ${textColor} transition-colors duration-300`}>
+                        <div className={`text-lg md:text-2xl font-mono min-h-[80px] flex items-start w-full justify-center lg:justify-start leading-relaxed ${textColor} transition-colors duration-300 drop-shadow-[0_0_5px_currentColor]`}>
                             <TypeAnimation
                                 sequence={sequence}
                                 wrapper="span"
@@ -72,8 +68,8 @@ const Hero = () => {
                             />
                         </div>
 
-                        <p className="text-slate-400 text-lg md:text-xl max-w-xl leading-relaxed font-sans mt-2">
-                            Hi There! My nickname is <strong className="text-white">Ifan</strong>. I'm a <strong className="text-white">20-year-old</strong> computer engineer based in <strong className="text-white">South Jakarta</strong>.
+                        <p className="text-white text-lg md:text-xl max-w-xl leading-relaxed font-sans mt-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
+                            Hi There! My nickname is <strong className="text-[#00FFFF]">Ifan</strong>. I'm a <strong className="text-[#FF00FF]">20-year-old</strong> computer engineer based in <strong className="text-[#39FF14]">South Jakarta</strong>.
                             I sit at the intersection of <strong className="text-[#00FFFF]">Software Engineering</strong> and <strong className="text-[#39FF14]">IoT/Embedded Systems</strong>,
                             with a growing interest in <strong className="text-[#FF00FF]">Networking/Cybersecurity</strong>.
                         </p>
