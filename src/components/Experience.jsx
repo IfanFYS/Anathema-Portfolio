@@ -147,15 +147,15 @@ const Experience = () => {
                     {/* Connecting Neon Line */}
                     <div className="absolute left-[28px] md:left-1/2 top-0 bottom-0 w-1 bg-linear-to-b from-[#00FFFF] via-[#FF00FF] to-[#39FF14] transform -translate-x-1/2 shadow-[0_0_10px_#FF00FF]" />
 
-                    <div className="flex flex-col gap-16">
+                    <div className="flex flex-col gap-12 md:gap-0">
                         {experiences.map((exp, idx) => (
                             <motion.div
-                                initial={{ opacity: 0, y: 50 }}
+                                initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, margin: "-100px" }}
-                                transition={{ duration: 0.6, delay: idx * 0.1 }}
+                                viewport={{ once: true, margin: "-50px" }}
+                                transition={{ duration: 0.4, delay: idx * 0.05 }}
                                 key={idx}
-                                className={`flex flex-col md:flex-row items-center gap-8 ${idx % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
+                                className={`flex flex-col md:flex-row items-center gap-8 ${idx % 2 === 0 ? 'md:flex-row-reverse' : ''} ${idx !== 0 ? 'md:-mt-32' : ''}`}
                             >
                                 {/* Content Box */}
                                 <div className={`w-full md:w-5/12 text-left pl-14 md:pl-0`}>
