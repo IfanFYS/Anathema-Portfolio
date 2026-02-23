@@ -27,7 +27,7 @@ const EducationCard = ({ data }) => {
         >
             {/* Campus Photo Background / Header */}
             <div className="h-56 w-full relative overflow-hidden text-left">
-                <div className="absolute inset-0 z-10 bg-black/40" />
+                <div className="absolute inset-0 z-10 bg-black/15" />
                 <img
                     src={`/assets/education/${data.slug}.jpg`}
                     alt={data.school}

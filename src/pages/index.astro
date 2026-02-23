@@ -39,7 +39,7 @@ import { projects } from "../data/projects.js";
 				>
 					{
 						projects.map((project) => (
-							<ProjectCard client:visible {...project} />
+							<ProjectCard client:load {...project} />
 						))
 					}
 				</div>

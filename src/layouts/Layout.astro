@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import CursorTrail from "../components/CursorTrail.jsx";
+
 import RetroBackground from "../components/RetroBackground.jsx";
 import Sidebar from "../components/Sidebar.jsx";
 
@@ -37,7 +37,6 @@ const { title = "Ifan's Portfolio" } = Astro.props;
 		<Sidebar client:only="react" />
 
 		{/* Visual FX */}
-		<CursorTrail client:only="react" />
 		<RetroBackground client:only="react" />
 
 		{
