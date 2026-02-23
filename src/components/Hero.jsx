@@ -30,17 +30,6 @@ const Hero = () => {
 
             <div className="max-w-7xl w-full z-10 flex flex-col items-center gap-8">
 
-                {/* Top: System Status Badge */}
-                <motion.div
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                >
-                    <span className="inline-block py-1 px-4 bg-black border border-[#00FFFF] text-[#00FFFF] text-sm font-bold tracking-widest uppercase shadow-[0_0_10px_#00FFFF]">
-                        System Online
-                    </span>
-                </motion.div>
-
                 {/* Main Content Grid: Image & Text */}
                 <div className="flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-20 w-full">
 

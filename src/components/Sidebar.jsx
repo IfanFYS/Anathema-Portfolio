@@ -15,19 +15,25 @@ const Sidebar = () => {
     const [activeHash, setActiveHash] = useState("");
 
     useEffect(() => {
+        let ticking = false;
         const handleScroll = () => {
-            const sections = navItems.map(item => item.href.substring(1));
-            let current = "";
-            for (const section of sections) {
-                const element = document.getElementById(section);
-                if (element && window.scrollY >= (element.offsetTop - 300)) {
-                    current = "#" + section;
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(() => {
+                const sections = navItems.map(item => item.href.substring(1));
+                let current = "";
+                for (const section of sections) {
+                    const element = document.getElementById(section);
+                    if (element && window.scrollY >= (element.offsetTop - 300)) {
+                        current = "#" + section;
+                    }
                 }
-            }
-            setActiveHash(current || "#home");
+                setActiveHash(current || "#home");
+                ticking = false;
+            });
         };
 
-        window.addEventListener("scroll", handleScroll);
+        window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 

@@ -98,6 +98,7 @@ const { title = "Ifan's Portfolio" } = Astro.props;
 	.perspective-grid {
 		transform: perspective(500px) rotateX(20deg);
 		transform-origin: top;
+		will-change: transform;
 	}
 
 	@keyframes scanlines {

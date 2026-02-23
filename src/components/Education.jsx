@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React from "react";
 import { Building2 } from "lucide-react";
 
 const educationData = [
@@ -21,57 +20,36 @@ const educationData = [
     }
 ];
 
-const EducationCard = ({ data, delay }) => {
-    const [logoError, setLogoError] = useState(false);
-    const [bgError, setBgError] = useState(false);
-    const [isHovered, setIsHovered] = useState(false);
-
+const EducationCard = ({ data }) => {
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: delay }}
-            onHoverStart={() => setIsHovered(true)}
-            onHoverEnd={() => setIsHovered(false)}
-            onTap={() => setIsHovered(!isHovered)}
-            className={`relative backdrop-blur-xl border border-white/10 overflow-hidden group transition-all duration-300 flex flex-col h-full ${isHovered ? 'bg-[#1a1a2e]' : 'bg-[#050510]/95'}`}
+        <div
+            className="relative bg-black border border-zinc-800 overflow-hidden group transition-all duration-300 flex flex-col h-full hover:border-[#00FFFF]"
         >
             {/* Campus Photo Background / Header */}
             <div className="h-56 w-full relative overflow-hidden text-left">
-                <div className={`absolute inset-0 z-10 transition-colors duration-500 ${isHovered ? 'bg-black/30' : 'bg-black/50'}`} />
+                <div className="absolute inset-0 z-10 bg-black/40" />
                 <img
                     src={`/assets/education/${data.slug}.jpg`}
                     alt={data.school}
-                    className={`w-full h-full object-cover transition-all duration-700 ${isHovered ? 'grayscale-0 scale-110' : 'grayscale scale-100'}`}
-                    onError={(e) => {
-                        e.currentTarget.style.display = 'none'; // Hide broken image
-                        setBgError(true);
-                    }}
+                    className="w-full h-full object-cover"
                 />
-                {bgError && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-zinc-900 border-b border-white/10 z-0">
-                        <Building2 className="text-white/20" size={48} />
-                    </div>
-                )}
             </div>
 
             {/* School Logo Overlay */}
             <div className="absolute top-56 left-6 -translate-y-1/2 w-20 h-20 z-30 bg-black border border-white/20 p-2 rounded-lg shadow-xl shadow-black/50">
-                {!logoError ? (
-                    <img
-                        src={`/assets/logos/${data.slug}.png`}
-                        alt="Logo"
-                        className="w-full h-full object-contain"
-                        onError={() => setLogoError(true)}
-                    />
-                ) : (
-                    <Building2 className="w-full h-full text-white/50" />
-                )}
+                <img
+                    src={`/assets/logos/${data.slug}.png`}
+                    alt="Logo"
+                    className="w-full h-full object-contain"
+                    onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                        e.currentTarget.parentElement.innerHTML = '<div class="w-full h-full flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white/50"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg></div>';
+                    }}
+                />
             </div>
 
             <div className="p-6 pt-12 grow flex flex-col items-start relative z-10 text-left">
-                <h3 className={`text-2xl font-bold mb-1 transition-colors leading-tight ${isHovered ? 'text-[#00FFFF]' : 'text-white'}`}>
+                <h3 className="text-2xl font-bold mb-1 text-white group-hover:text-[#00FFFF] transition-colors leading-tight">
                     {data.school}
                 </h3>
                 <p className="text-slate-300 font-medium mb-4 text-sm uppercase tracking-wide">{data.degree}</p>
@@ -89,7 +67,7 @@ const EducationCard = ({ data, delay }) => {
             {/* Corner Accent */}
             <div className="absolute top-0 right-0 w-2 h-2 bg-[#00FFFF] shadow-[0_0_10px_#00FFFF]" />
             <div className="absolute bottom-0 left-0 w-2 h-2 bg-[#FF00FF] shadow-[0_0_10px_#FF00FF]" />
-        </motion.div>
+        </div>
     );
 };
 
@@ -103,7 +81,7 @@ const Education = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {educationData.map((edu, idx) => (
-                        <EducationCard key={idx} data={edu} delay={idx * 0.2} />
+                        <EducationCard key={idx} data={edu} />
                     ))}
                 </div>
             </div>

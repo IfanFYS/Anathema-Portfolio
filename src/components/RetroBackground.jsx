@@ -1,58 +1,70 @@
-import React, { useEffect, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import React, { useEffect, useRef } from "react";
+import { motion, useScroll, useTransform, useMotionValue } from "framer-motion";
 
 const RetroBackground = () => {
     const { scrollY } = useScroll();
-    const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+    // Use motion values for mouse position to avoid React re-renders
+    const mouseX = useMotionValue(0);
 
     // Parallax transforms
-    // Parallax transforms - scaled for fuller page length
-    // Parallax transforms - scaled for fuller page length
-    // Parallax transforms - scaled for fuller page length
-    // Sun moves much slower now (0 to 300px over 8000px scroll)
     const sunY = useTransform(scrollY, [0, 8000], [0, 300]);
     const mountainsY = useTransform(scrollY, [0, 2000], [0, 100]);
 
+    // Derived motion values for transforms (no re-renders)
+    const sunX = useTransform(mouseX, v => v * -1);
+    const mountainsX = useTransform(mouseX, v => v * 0.5);
+
     useEffect(() => {
+        let rafId = null;
+        let latestX = 0;
+        let ticking = false;
+
         const handleMouseMove = (e) => {
-            setMousePos({
-                x: (e.clientX / window.innerWidth - 0.5) * 20, // -10 to 10
-                y: (e.clientY / window.innerHeight - 0.5) * 10  // -5 to 5
-            });
+            latestX = (e.clientX / window.innerWidth - 0.5) * 20;
+            if (!ticking) {
+                ticking = true;
+                rafId = requestAnimationFrame(() => {
+                    mouseX.set(latestX);
+                    ticking = false;
+                });
+            }
         };
-        window.addEventListener("mousemove", handleMouseMove);
-        return () => window.removeEventListener("mousemove", handleMouseMove);
-    }, []);
+
+        window.addEventListener("mousemove", handleMouseMove, { passive: true });
+        return () => {
+            window.removeEventListener("mousemove", handleMouseMove);
+            if (rafId) cancelAnimationFrame(rafId);
+        };
+    }, [mouseX]);
 
     return (
         <div className="fixed inset-0 z-0 overflow-hidden bg-[#050510] pointer-events-none">
 
             {/* Stars / Noise layer */}
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-slate-900 via-[#050510] to-black opacity-80" />
-            <div className="absolute inset-0 opacity-20 bg-[url('/assets/noise.png')] mix-blend-overlay" />
 
-            {/* The Sun - Darker & Less Bright */}
+            {/* The Sun */}
             <motion.div
                 initial={{ opacity: 0, top: "20%" }}
                 animate={{ opacity: 1, top: "5%" }}
                 transition={{ duration: 2, ease: "easeOut" }}
-                style={{ y: sunY, x: mousePos.x * -1 }}
-                // Centered on mobile, shifted right on desktop to account for sidebar
+                style={{ y: sunY, x: sunX }}
                 className="absolute left-1/2 md:left-[calc(50%+3rem)] -translate-x-1/2 w-[300px] h-[300px] md:w-[500px] md:h-[500px] rounded-full bg-linear-to-b from-[#ff3300] to-[#990099] shadow-[0_0_100px_rgba(255,0,255,0.3)] z-0"
             >
-                {/* Sun Stripes (Scanline mask effect) */}
+                {/* Sun Stripes */}
                 <div
                     className="absolute inset-0 w-full h-full rounded-full"
                     style={{
                         background: "repeating-linear-gradient(to bottom, transparent 0%, transparent 80%, #050510 80%, #050510 100%)",
-                        backgroundSize: "100% 40px" // Adjust stripe thickness
+                        backgroundSize: "100% 40px"
                     }}
                 />
             </motion.div>
 
             {/* Mountains - SVG Layer */}
             <motion.div
-                style={{ y: mountainsY, x: mousePos.x * 0.5 }}
+                style={{ y: mountainsY, x: mountainsX }}
                 className="absolute bottom-[20%] left-0 right-0 z-10 w-full"
             >
                 <svg viewBox="0 0 1440 320" className="w-full opacity-90 block" preserveAspectRatio="none">
@@ -63,7 +75,7 @@ const RetroBackground = () => {
                 </svg>
             </motion.div>
 
-            {/* Horizon Blocker - Occludes Sun when it sets */}
+            {/* Horizon Blocker */}
             <div className="absolute bottom-0 left-0 right-0 h-[50%] bg-[#050510] z-15" />
 
             {/* Moving Grid Floor */}
