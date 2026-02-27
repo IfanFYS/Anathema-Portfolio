@@ -43,12 +43,14 @@ const Sidebar = () => {
             md:left-0 md:top-0 md:bottom-0 md:w-24 md:h-auto md:border-r md:border-b-0 md:flex-col md:py-8
         ">
             {/* Logo Area */}
-            <div className="shrink-0">
-                <h1 className="text-2xl font-black tracking-tighter pr-1">
-                    <span className="text-slate-500">
-                        FYS
-                    </span>
-                </h1>
+            <div className="shrink-0 cursor-pointer">
+                <a href="#home" className="group block">
+                    <h1 className="text-2xl font-black tracking-tighter pr-1 flex">
+                        <span className="text-slate-500 transition-colors duration-300 group-hover:text-[#00FFFF] group-hover:drop-shadow-[0_0_8px_rgba(0,255,255,0.8)]">F</span>
+                        <span className="text-slate-500 transition-colors duration-300 group-hover:text-[#FF00FF] group-hover:drop-shadow-[0_0_8px_rgba(255,0,255,0.8)]">Y</span>
+                        <span className="text-slate-500 transition-colors duration-300 group-hover:text-[#FFFF00] group-hover:drop-shadow-[0_0_8px_rgba(255,255,0,0.8)]">S</span>
+                    </h1>
+                </a>
             </div>
 
             {/* Navigation Icons */}

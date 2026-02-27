@@ -26,7 +26,6 @@
     lengthAdjust="spacingAndGlyphs"
     filter="url(#neon-glow)"
   >
-    <tspan fill="#00FFFF">F</tspan><tspan fill="#FF00FF">Y</tspan><tspan fill="#39FF14">S</tspan>
+    <tspan fill="#00FFFF">F</tspan><tspan fill="#FF00FF">Y</tspan><tspan fill="#FFFF00">S</tspan>
   </text>
-  
 </svg>
