@@ -51,17 +51,18 @@ const { title = "Ifan's Portfolio" } = Astro.props;
 <style is:global>
 	/* Custom scrollbar */
 	::-webkit-scrollbar {
-		width: 8px;
+		width: 10px;
 	}
 	::-webkit-scrollbar-track {
 		background: #000000;
+		border-left: 1px solid rgba(0, 255, 255, 0.2);
 	}
 	::-webkit-scrollbar-thumb {
-		background: #333;
+		background: linear-gradient(to bottom, #00ffff, #ff00ff, #39ff14);
 		border-radius: 0px; /* Sharp corners */
 	}
 	::-webkit-scrollbar-thumb:hover {
-		background: #00ffff;
+		background: linear-gradient(to bottom, #ff00ff, #39ff14, #00ffff);
 	}
 
 	body {
