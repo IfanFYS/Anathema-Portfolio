@@ -101,7 +101,7 @@ const ProjectCard = ({ title, desc, stack, tag, color = "#00FFFF", slug, images 
                                             ref={imgRef}
                                             src={`/assets/projects/${imageList[currentImgIndex]}`}
                                             alt={title}
-                                            className="w-full h-full object-cover transition-all duration-300 grayscale-0 md:grayscale md:group-hover:grayscale-0"
+                                            className="w-full h-full object-cover transition-all duration-300"
                                             onLoad={handleImageLoad}
                                             onError={handleImageError}
                                             loading="eager"
@@ -128,7 +128,7 @@ const ProjectCard = ({ title, desc, stack, tag, color = "#00FFFF", slug, images 
                                 ref={imgRef}
                                 src={`/assets/projects/${imageList[0]}`}
                                 alt={title}
-                                className="w-full h-full object-cover transition-all duration-300 absolute inset-0 grayscale-0 md:grayscale md:group-hover:grayscale-0"
+                                className="w-full h-full object-cover transition-all duration-300 absolute inset-0"
                                 onLoad={handleImageLoad}
                                 onError={handleImageError}
                                 loading="eager"
@@ -174,8 +174,11 @@ const ProjectCard = ({ title, desc, stack, tag, color = "#00FFFF", slug, images 
 
             <div className="p-6 flex flex-col grow">
                 <h3
-                    className="text-2xl font-black mb-3 text-white uppercase tracking-tighter truncate"
-                    style={{ textShadow: `2px 2px 0px ${color}40` }}
+                    className="text-2xl font-black mb-3 uppercase tracking-tighter truncate transition-colors duration-300"
+                    style={{
+                        color: isHovered ? color : 'white',
+                        textShadow: `2px 2px 0px ${color}40`
+                    }}
                     title={title}
                 >
                     {title}

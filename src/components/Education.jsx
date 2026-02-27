@@ -75,7 +75,7 @@ const Education = () => {
     return (
         <section id="education" className="py-20 px-4">
             <div className="max-w-6xl mx-auto">
-                <h2 className="text-4xl md:text-6xl font-black mb-16 text-center uppercase tracking-tighter text-[#FFFF00] drop-shadow-[0_0_15px_rgba(255,255,0,0.6)]">
+                <h2 className="text-4xl md:text-6xl font-black mb-16 text-center uppercase tracking-tighter text-white drop-shadow-[0_0_25px_rgba(255,255,255,0.5)]">
                     Academic Archives
                 </h2>
 

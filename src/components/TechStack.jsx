@@ -115,8 +115,8 @@ const TechStack = () => {
     return (
         <section className="py-20 px-4" id="tech-stack">
             <div className="max-w-6xl mx-auto">
-                <h2 className="text-4xl md:text-6xl font-black mb-16 text-center uppercase tracking-tighter text-white">
-                    <span className="text-[#00FFFF] drop-shadow-[0_0_10px_rgba(0,255,255,0.5)]">Technical Arsenal</span>
+                <h2 className="text-4xl md:text-6xl font-black mb-16 text-center uppercase tracking-tighter text-white drop-shadow-[0_0_25px_rgba(255,255,255,0.5)]">
+                    Technical Arsenal
                 </h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
