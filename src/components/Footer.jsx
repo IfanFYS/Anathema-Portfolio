@@ -4,10 +4,9 @@ import { FaLinkedin, FaGithub, FaWhatsapp, FaInstagram, FaDiscord, FaLine, FaEnv
 const socialLinks = [
     { name: 'LinkedIn', url: 'https://www.linkedin.com/in/fathanyazidsatriani/', icon: FaLinkedin, color: 'hover:text-[#0077B5]' },
     { name: 'GitHub', url: 'https://github.com/IfanFYS', icon: FaGithub, color: 'hover:text-white' },
-    { name: 'Email', url: 'mailto:fathanyazidsatriani@gmail.com', icon: FaEnvelope, color: 'hover:text-[#EA4335]' },
-    { name: 'Discord', url: '#', icon: FaDiscord, color: 'hover:text-[#5865F2]' },
+    { name: 'Discord', url: 'https://discord.com/users/368703856886022154', icon: FaDiscord, color: 'hover:text-[#5865F2]' },
     { name: 'WhatsApp', url: 'https://wa.me/6281398696033', icon: FaWhatsapp, color: 'hover:text-[#25D366]' },
-    { name: 'Line', url: '#', icon: FaLine, color: 'hover:text-[#00C300]' },
+    { name: 'Line', url: 'https://line.me/ti/p/hRktodFkNx', icon: FaLine, color: 'hover:text-[#00C300]' },
 ];
 
 const Footer = () => {

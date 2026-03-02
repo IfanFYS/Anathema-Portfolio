@@ -7,11 +7,12 @@ import {
     SiFigma, SiPostgresql, SiDocker, SiGit, SiGithub,
     SiMongodb, SiRedis, SiVercel, SiAmazonwebservices, SiFirebase,
     SiJira, SiNotion, SiPostman, SiTrello, SiCanva, SiAdobephotoshop,
-    SiTensorflow, SiPytorch, SiOpencv
+    SiTensorflow, SiPytorch, SiOpencv,
+    SiKubernetes
 } from "react-icons/si";
 import { VscCode } from "react-icons/vsc";
 import { FaJava } from "react-icons/fa";
-import { TbBrandCSharp, TbSql } from "react-icons/tb";
+import { TbBrandCSharp } from "react-icons/tb";
 import { Cpu, Database, Brain } from "lucide-react"; // Fallback for VHDL/Hardware/AI if needed
 
 // Helper to get icon
@@ -23,17 +24,17 @@ const getTechConfig = (name) => {
     if (norm.includes("github")) return { icon: SiGithub, color: "#FFFFFF" };
     if (norm.includes("typescript")) return { icon: SiTypescript, color: "#3178C6" };
     if (norm.includes("javascript")) return { icon: SiJavascript, color: "#F7DF1E" };
-    if (norm.includes("postgres")) return { icon: SiPostgresql, color: "#4169E1" }; // Before "sql"
+    if (norm.includes("postgres")) return { icon: SiPostgresql, color: "#FFFFFF" }; // Before "sql"
     if (norm.includes("mongodb")) return { icon: SiMongodb, color: "#47A248" }; // Before "go"
 
     // Languages
     if (norm.includes("c++") || norm === "c") return { icon: SiCplusplus, color: "#00599C" };
-    if (norm.includes("python")) return { icon: SiPython, color: "#3776AB" };
-    if (norm.includes("java")) return { icon: FaJava, color: "#007396" };
-    if (norm.includes("c#")) return { icon: TbBrandCSharp, color: "#239120" };
+    if (norm.includes("python")) return { icon: SiPython, color: "#FFD43B" };
+    if (norm.includes("java")) return { icon: FaJava, color: "#F8981D" };
+    if (norm.includes("c#")) return { icon: TbBrandCSharp, color: "#5C2D91" };
     if (norm.includes("go")) return { icon: SiGo, color: "#00ADD8" };
     if (norm.includes("rust")) return { icon: SiRust, color: "#DEA584" };
-    if (norm.includes("sql")) return { icon: TbSql, color: "#4479A1" };
+    if (norm.includes("sql")) return { icon: Database, color: "#4479A1" };
 
     // Frameworks
     if (norm.includes("react")) return { icon: SiReact, color: "#61DAFB" };
@@ -66,6 +67,7 @@ const getTechConfig = (name) => {
     if (norm.includes("photoshop")) return { icon: SiAdobephotoshop, color: "#31A8FF" };
 
     // DevOps & Tools
+    if (norm.includes("kubernetes")) return { icon: SiKubernetes, color: "#326CE5" };
     if (norm.includes("docker")) return { icon: SiDocker, color: "#2496ED" };
     if (norm.includes("git")) return { icon: SiGit, color: "#F05032" };
     if (norm.includes("redis")) return { icon: SiRedis, color: "#DC382D" };
@@ -87,7 +89,7 @@ const getTechConfig = (name) => {
 const skills = [
     {
         category: "Languages",
-        items: ["C/C++", "Python", "Java", "C#", "JavaScript", "TypeScript", "Go", "SQL"]
+        items: ["C/C++", "Python", "Java", "C#", "JavaScript", "TypeScript", "Go", "SQL", "PostgreSQL"]
     },
     {
         category: "Web/Frameworks",
@@ -103,7 +105,7 @@ const skills = [
     },
     {
         category: "DevOps & Tools",
-        items: ["PostgreSQL", "MongoDB", "Redis", "Docker", "Git", "Vercel", "AWS", "Postman"]
+        items: ["MongoDB", "Redis", "Docker", "Kubernetes", "Git", "Vercel", "AWS", "Postman"]
     },
     {
         category: "AI/ML",
