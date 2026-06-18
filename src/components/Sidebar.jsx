@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import { Home, Briefcase, Cpu, GraduationCap, Mail, Terminal } from "lucide-react";
 
 const navItems = [
@@ -45,7 +44,7 @@ const Sidebar = () => {
             {/* Logo Area */}
             <div className="shrink-0 cursor-pointer">
                 <a href="#home" className="group block">
-                    <h1 className="text-2xl font-black tracking-tighter pr-1 flex">
+                    <h1 className="text-2xl font-black tracking-tight pr-1 flex">
                         <span className="text-slate-500 transition-colors duration-300 group-hover:text-[#00FFFF] group-hover:drop-shadow-[0_0_8px_rgba(0,255,255,0.8)]">F</span>
                         <span className="text-slate-500 transition-colors duration-300 group-hover:text-[#FF00FF] group-hover:drop-shadow-[0_0_8px_rgba(255,0,255,0.8)]">Y</span>
                         <span className="text-slate-500 transition-colors duration-300 group-hover:text-[#FFFF00] group-hover:drop-shadow-[0_0_8px_rgba(255,255,0,0.8)]">S</span>

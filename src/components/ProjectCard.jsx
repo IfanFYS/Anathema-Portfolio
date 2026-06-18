@@ -1,61 +1,69 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Cpu, Gamepad2, Globe, Terminal, Loader2, ChevronLeft, ChevronRight } from "lucide-react";
+import { Cpu, Gamepad2, Globe, Terminal, ChevronLeft, ChevronRight } from "lucide-react";
 
 const ProjectCard = ({ title, desc, stack, tag, color = "#00FFFF", slug, images }) => {
-    const [imgError, setImgError] = useState(false);
-    const [imgLoading, setImgLoading] = useState(true);
+    const [failedSrcs, setFailedSrcs] = useState(() => new Set());
     const [currentImgIndex, setCurrentImgIndex] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
+    const [hasMounted, setHasMounted] = useState(false);
 
-    // Ref for the currently displayed image
-    const imgRef = useRef(null);
+    const getImageSrc = (image) => image.startsWith("/") ? image : `/assets/projects/${image}`;
+    const imageSources = useMemo(() => {
+        const imageList = images && images.length > 0 ? images : [`${slug}.png`];
+        return imageList.map(getImageSrc);
+    }, [images, slug]);
+    const availableImages = imageSources.filter((src) => !failedSrcs.has(src));
+    const hasImages = availableImages.length > 0;
+    const activeImageIndex = hasImages ? currentImgIndex % availableImages.length : 0;
+    const activeImageSrc = availableImages[activeImageIndex];
+    const hasMultipleImages = availableImages.length > 1;
 
-    // Determines the valid image list or falls back to legacy slug
-    const imageList = images && images.length > 0 ? images : [`${slug}.png`];
+    useEffect(() => {
+        setHasMounted(true);
+    }, []);
+
+    useEffect(() => {
+        setFailedSrcs(new Set());
+        setCurrentImgIndex(0);
+    }, [imageSources]);
+
+    useEffect(() => {
+        imageSources.forEach((src) => {
+            const image = new Image();
+            image.src = src;
+        });
+    }, [imageSources]);
 
     // Slideshow Logic: Cycle images on hover
     useEffect(() => {
         let interval;
-        if (isHovered && imageList.length > 1) {
+        if (isHovered && hasMultipleImages) {
             interval = setInterval(() => {
-                setCurrentImgIndex((prev) => (prev + 1) % imageList.length);
+                setCurrentImgIndex((prev) => (prev + 1) % availableImages.length);
             }, 3000); // Slower automatic switch
         } else {
             if (!isHovered) setCurrentImgIndex(0);
         }
         return () => clearInterval(interval);
-    }, [isHovered, imageList.length]);
+    }, [availableImages.length, hasMultipleImages, isHovered]);
 
     const nextImage = (e) => {
         e.stopPropagation();
-        setCurrentImgIndex((prev) => (prev + 1) % imageList.length);
+        setCurrentImgIndex((prev) => (prev + 1) % availableImages.length);
     };
 
     const prevImage = (e) => {
         e.stopPropagation();
-        setCurrentImgIndex((prev) => (prev - 1 + imageList.length) % imageList.length);
+        setCurrentImgIndex((prev) => (prev - 1 + availableImages.length) % availableImages.length);
     };
 
-    // Failsafe for loading state
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            if (imgLoading) {
-                if (imgRef.current && imgRef.current.complete) {
-                    setImgLoading(false);
-                }
-            }
-        }, 1500);
-        return () => clearTimeout(timer);
-    }, [imgLoading, currentImgIndex]);
-
-    const handleImageLoad = () => {
-        setImgLoading(false);
-    };
-
-    const handleImageError = () => {
-        setImgError(true);
-        setImgLoading(false);
+    const handleImageError = (src) => {
+        setFailedSrcs((prev) => {
+            const next = new Set(prev);
+            next.add(src);
+            return next;
+        });
     };
 
     // Map icons
@@ -73,7 +81,7 @@ const ProjectCard = ({ title, desc, stack, tag, color = "#00FFFF", slug, images 
             onTap={() => setIsHovered(!isHovered)}
             whileHover={{ y: -5, scale: 1.02 }}
             transition={{ duration: 0.2 }}
-            className={`group relative bg-black/90 border rounded-none flex flex-col transition-all duration-300 overflow-hidden h-full ${isHovered ? 'border-[currentColor]' : 'border-zinc-800'}`}
+            className={`group relative bg-black/90 border rounded-lg flex flex-col transition-all duration-300 overflow-hidden h-full backdrop-blur-sm ${isHovered ? 'border-[currentColor]' : 'border-white/10'}`}
             style={{ borderColor: isHovered ? color : undefined }}
         >
             {/* Intense Glow on Hover */}
@@ -83,27 +91,25 @@ const ProjectCard = ({ title, desc, stack, tag, color = "#00FFFF", slug, images 
             />
 
             {/* Thumbnail Image Area */}
-            <div className={`w-full aspect-video bg-zinc-900 border-b relative overflow-hidden ${isHovered ? 'border-[currentColor]' : 'border-zinc-800'}`} style={{ color: color }}>
-                {!imgError ? (
+            <div className={`w-full aspect-video bg-zinc-900 border-b relative overflow-hidden ${isHovered ? 'border-[currentColor]' : 'border-white/10'}`} style={{ color: color }}>
+                {hasImages ? (
                     <>
-                        {imageList.length > 1 ? (
+                        {hasMultipleImages ? (
                             <>
-                                <AnimatePresence mode="wait">
+                                <AnimatePresence initial={false}>
                                     <motion.div
-                                        key={currentImgIndex}
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        exit={{ opacity: 0 }}
-                                        transition={{ duration: 0.5 }}
+                                        key={activeImageSrc}
+                                        initial={hasMounted ? { x: "100%" } : false}
+                                        animate={{ x: 0 }}
+                                        exit={{ x: "-100%" }}
+                                        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                                         className="absolute inset-0 w-full h-full"
                                     >
                                         <img
-                                            ref={imgRef}
-                                            src={`/assets/projects/${imageList[currentImgIndex]}`}
+                                            src={activeImageSrc}
                                             alt={title}
                                             className="w-full h-full object-cover transition-all duration-300"
-                                            onLoad={handleImageLoad}
-                                            onError={handleImageError}
+                                            onError={() => handleImageError(activeImageSrc)}
                                             loading="eager"
                                         />
                                     </motion.div>
@@ -112,34 +118,27 @@ const ProjectCard = ({ title, desc, stack, tag, color = "#00FFFF", slug, images 
                                 {/* Manual Controls */}
                                 <button
                                     onClick={prevImage}
-                                    className={`absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white p-1 rounded-full transition-opacity z-30 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+                                    className={`absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white p-1 rounded transition-opacity z-30 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+                                    aria-label="Previous project image"
                                 >
                                     <ChevronLeft size={20} />
                                 </button>
                                 <button
                                     onClick={nextImage}
-                                    className={`absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white p-1 rounded-full transition-opacity z-30 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+                                    className={`absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white p-1 rounded transition-opacity z-30 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+                                    aria-label="Next project image"
                                 >
                                     <ChevronRight size={20} />
                                 </button>
                             </>
                         ) : (
                             <img
-                                ref={imgRef}
-                                src={`/assets/projects/${imageList[0]}`}
+                                src={activeImageSrc}
                                 alt={title}
                                 className="w-full h-full object-cover transition-all duration-300 absolute inset-0"
-                                onLoad={handleImageLoad}
-                                onError={handleImageError}
+                                onError={() => handleImageError(activeImageSrc)}
                                 loading="eager"
                             />
-                        )}
-
-                        {/* Persistent Loader */}
-                        {imgLoading && (
-                            <div className="absolute inset-0 flex items-center justify-center bg-zinc-900 text-zinc-600 z-10">
-                                <Loader2 className="animate-spin" />
-                            </div>
                         )}
                     </>
                 ) : (
@@ -160,12 +159,12 @@ const ProjectCard = ({ title, desc, stack, tag, color = "#00FFFF", slug, images 
                     </span>
                 </div>
                 {/* Image indicator dots if multiple */}
-                {imageList.length > 1 && (
+                {hasMultipleImages && (
                     <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 z-20">
-                        {imageList.map((_, idx) => (
+                        {availableImages.map((src, idx) => (
                             <div
-                                key={idx}
-                                className={`w-1 h-1 rounded-full transition-colors ${idx === currentImgIndex ? 'bg-white' : 'bg-white/30'}`}
+                                key={src}
+                                className={`w-1 h-1 rounded-full transition-colors ${idx === activeImageIndex ? 'bg-white' : 'bg-white/30'}`}
                             />
                         ))}
                     </div>
@@ -174,7 +173,7 @@ const ProjectCard = ({ title, desc, stack, tag, color = "#00FFFF", slug, images 
 
             <div className="p-6 flex flex-col grow">
                 <h3
-                    className="text-2xl font-black mb-3 uppercase tracking-tighter truncate transition-colors duration-300"
+                    className="text-xl md:text-2xl font-black mb-3 uppercase tracking-tight transition-colors duration-300"
                     style={{
                         color: isHovered ? color : 'white',
                         textShadow: `2px 2px 0px ${color}40`
@@ -184,7 +183,7 @@ const ProjectCard = ({ title, desc, stack, tag, color = "#00FFFF", slug, images 
                     {title}
                 </h3>
 
-                <p className={`text-slate-400 mb-6 font-mono text-xs leading-relaxed border-l-2 pl-4 grow transition-colors line-clamp-3 ${isHovered ? 'border-white' : 'border-zinc-800'}`}>
+                <p className={`text-slate-400 mb-6 font-mono text-xs leading-relaxed border-l-2 pl-4 grow transition-colors line-clamp-3 ${isHovered ? 'border-white' : 'border-white/10'}`}>
                     {desc}
                 </p>
 
@@ -192,7 +191,7 @@ const ProjectCard = ({ title, desc, stack, tag, color = "#00FFFF", slug, images 
                     {stack.split(', ').slice(0, 4).map((tech, idx) => (
                         <span
                             key={idx}
-                            className={`text-[10px] font-bold uppercase tracking-widest text-slate-500 bg-zinc-900 px-2 py-1 border transition-colors ${isHovered ? 'border-slate-500' : 'border-zinc-800'}`}
+                            className={`text-[10px] font-bold uppercase tracking-widest text-slate-500 bg-zinc-900 px-2 py-1 border transition-colors ${isHovered ? 'border-slate-500' : 'border-white/10'}`}
                         >
                             {tech}
                         </span>

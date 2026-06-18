@@ -3,17 +3,29 @@ import {
     SiCplusplus, SiPython, SiTypescript, SiGo, SiJavascript, SiRust,
     SiReact, SiNextdotjs, SiAstro, SiTailwindcss, SiExpress, SiFastapi, SiDjango, SiFlutter,
     SiNodedotjs, SiVuedotjs, SiSvelte, SiFlask,
-    SiArduino, SiLinux, SiRaspberrypi, SiPlatformio,
+    SiArduino, SiLinux, SiRaspberrypi, SiPlatformio, SiEspressif, SiProteus,
     SiFigma, SiPostgresql, SiDocker, SiGit, SiGithub,
-    SiMongodb, SiRedis, SiVercel, SiAmazonwebservices, SiFirebase,
+    SiMongodb, SiMysql, SiNeo4J, SiRedis, SiVercel, SiAmazonwebservices, SiFirebase,
     SiJira, SiNotion, SiPostman, SiTrello, SiCanva, SiAdobephotoshop,
     SiTensorflow, SiPytorch, SiOpencv,
-    SiKubernetes
+    SiKubernetes, SiDart, SiLatex, SiMarkdown, SiNvidia, SiHtml5, SiCss3, SiCisco
 } from "react-icons/si";
 import { VscCode } from "react-icons/vsc";
 import { FaJava } from "react-icons/fa";
 import { TbBrandCSharp } from "react-icons/tb";
-import { Cpu, Database, Brain } from "lucide-react"; // Fallback for VHDL/Hardware/AI if needed
+import { Database } from "lucide-react";
+
+const TextBadgeIcon = ({ label, size = 40, style }) => (
+    <div
+        className="flex items-center justify-center font-black text-sm"
+        style={{ width: size, height: size, color: style?.color, letterSpacing: 0 }}
+    >
+        {label}
+    </div>
+);
+
+const VhdlIcon = (props) => <TextBadgeIcon {...props} label="VHDL" />;
+const AssemblyIcon = (props) => <TextBadgeIcon {...props} label="ASM" />;
 
 // Helper to get icon
 const getTechConfig = (name) => {
@@ -24,8 +36,13 @@ const getTechConfig = (name) => {
     if (norm.includes("github")) return { icon: SiGithub, color: "#FFFFFF" };
     if (norm.includes("typescript")) return { icon: SiTypescript, color: "#3178C6" };
     if (norm.includes("javascript")) return { icon: SiJavascript, color: "#F7DF1E" };
+    if (norm === "html") return { icon: SiHtml5, color: "#E34F26" };
+    if (norm === "css") return { icon: SiCss3, color: "#1572B6" };
     if (norm.includes("postgres")) return { icon: SiPostgresql, color: "#FFFFFF" }; // Before "sql"
+    if (norm.includes("mysql")) return { icon: SiMysql, color: "#4479A1" };
+    if (norm.includes("neo4j")) return { icon: SiNeo4J, color: "#008CC1" };
     if (norm.includes("mongodb")) return { icon: SiMongodb, color: "#47A248" }; // Before "go"
+    if (norm.includes("nvidia")) return { icon: SiNvidia, color: "#76B900" };
 
     // Languages
     if (norm.includes("c++") || norm === "c") return { icon: SiCplusplus, color: "#00599C" };
@@ -33,7 +50,12 @@ const getTechConfig = (name) => {
     if (norm.includes("java")) return { icon: FaJava, color: "#F8981D" };
     if (norm.includes("c#")) return { icon: TbBrandCSharp, color: "#5C2D91" };
     if (norm.includes("go")) return { icon: SiGo, color: "#00ADD8" };
+    if (norm.includes("dart")) return { icon: SiDart, color: "#0175C2" };
     if (norm.includes("rust")) return { icon: SiRust, color: "#DEA584" };
+    if (norm.includes("assembly")) return { icon: AssemblyIcon, color: "#FF5F1F" };
+    if (norm.includes("vhdl")) return { icon: VhdlIcon, color: "#C9D1D9" };
+    if (norm.includes("latex")) return { icon: SiLatex, color: "#008080" };
+    if (norm.includes("markdown")) return { icon: SiMarkdown, color: "#FFFFFF" };
     if (norm.includes("sql")) return { icon: Database, color: "#4479A1" };
 
     // Frameworks
@@ -51,12 +73,11 @@ const getTechConfig = (name) => {
 
     // Embedded/IoT
     if (norm.includes("arduino")) return { icon: SiArduino, color: "#00979D" };
-    if (norm.includes("esp32")) return { icon: Cpu, color: "#E7352C" };
+    if (norm.includes("esp32")) return { icon: SiEspressif, color: "#E7352C" };
     if (norm.includes("linux")) return { icon: SiLinux, color: "#FCC624" };
-    if (norm.includes("vhdl")) return { icon: Cpu, color: "#555555" };
     if (norm.includes("raspberry")) return { icon: SiRaspberrypi, color: "#A22846" };
-    if (norm.includes("stm32")) return { icon: Cpu, color: "#03234B" };
     if (norm.includes("platformio")) return { icon: SiPlatformio, color: "#FF7F00" };
+    if (norm.includes("proteus")) return { icon: SiProteus, color: "#1C79B3" };
 
     // Design & Planning
     if (norm.includes("figma")) return { icon: SiFigma, color: "#F24E1E" };
@@ -76,40 +97,44 @@ const getTechConfig = (name) => {
     if (norm.includes("firebase")) return { icon: SiFirebase, color: "#FFCA28" };
     if (norm.includes("postman")) return { icon: SiPostman, color: "#FF6C37" };
     if (norm.includes("vs code") || norm.includes("vscode")) return { icon: VscCode, color: "#007ACC" };
+    if (norm.includes("packet tracer")) return { icon: SiCisco, color: "#1BA0D7" };
 
     // AI/ML
     if (norm.includes("tensorflow")) return { icon: SiTensorflow, color: "#FF6F00" };
     if (norm.includes("pytorch")) return { icon: SiPytorch, color: "#EE4C2C" };
     if (norm.includes("opencv")) return { icon: SiOpencv, color: "#5C3EE8" };
-    if (norm.includes("yolo")) return { icon: Brain, color: "#00FFFF" };
 
-    return { icon: Cpu, color: "#CCCCCC" };
+    return null;
 };
 
 const skills = [
     {
         category: "Languages",
-        items: ["C/C++", "Python", "Java", "C#", "JavaScript", "TypeScript", "Go", "SQL", "PostgreSQL"]
+        items: ["C/C++", "Python", "Java", "C#", "JavaScript", "TypeScript", "Go", "Dart", "VHDL", "Assembly", "LaTeX", "Markdown"]
     },
     {
         category: "Web/Frameworks",
-        items: ["React", "Next.js", "Astro", "Tailwind", "Express.js", "FastAPI", "Django", "Node.js", "Vue.js", "Flutter"]
+        items: ["React", "Next.js", "Astro", "Tailwind", "Express.js", "FastAPI", "Django", "Node.js", "Flutter", "HTML", "CSS"]
+    },
+    {
+        category: "Database",
+        items: ["PostgreSQL", "MySQL", "MongoDB", "Redis", "Neo4j"]
     },
     {
         category: "Hardware/IoT",
-        items: ["Arduino", "ESP32", "Raspberry Pi", "Linux", "VHDL", "PlatformIO"]
+        items: ["Arduino", "ESP32", "Raspberry Pi", "Linux", "Proteus", "PlatformIO"]
     },
     {
-        category: "Design & Planning",
-        items: ["Figma", "Canva", "Photoshop", "Jira", "Notion", "Trello"]
+        category: "Networking & Cloud",
+        items: ["Docker", "Kubernetes", "NVIDIA Aerial", "Packet Tracer"]
     },
     {
-        category: "DevOps & Tools",
-        items: ["MongoDB", "Redis", "Docker", "Kubernetes", "Git", "Vercel", "AWS", "Postman"]
+        category: "Tools & Design",
+        items: ["Git", "GitHub", "Figma", "Canva", "Photoshop", "Jira", "Trello", "Postman"]
     },
     {
         category: "AI/ML",
-        items: ["TensorFlow", "PyTorch", "OpenCV", "YOLO"]
+        items: ["TensorFlow", "PyTorch", "OpenCV"]
     },
 ];
 
@@ -117,7 +142,7 @@ const TechStack = () => {
     return (
         <section className="py-20 px-4" id="tech-stack">
             <div className="max-w-6xl mx-auto">
-                <h2 className="text-4xl md:text-6xl font-black mb-16 text-center uppercase tracking-tighter text-white drop-shadow-[0_0_25px_rgba(255,255,255,0.5)]">
+                <h2 className="text-4xl md:text-6xl font-black mb-16 text-center uppercase tracking-tight text-white drop-shadow-[0_0_18px_rgba(255,255,255,0.35)]">
                     Technical Arsenal
                 </h2>
 
@@ -125,21 +150,23 @@ const TechStack = () => {
                     {skills.map((skillGroup, idx) => (
                         <div
                             key={idx}
-                            className="bg-black border border-zinc-800 p-8 hover:border-[#FF00FF] transition-colors duration-300"
+                            className="bg-black/90 border border-white/10 p-6 md:p-8 hover:border-[#FF00FF] transition-colors duration-300 rounded-lg backdrop-blur-sm"
                         >
-                            <h3 className="text-2xl font-bold mb-8 text-[#FF00FF] uppercase tracking-wider border-b border-zinc-900 pb-2">
+                            <h3 className="text-xl md:text-2xl font-bold mb-8 text-[#FF00FF] uppercase tracking-wider border-b border-white/10 pb-2">
                                 {skillGroup.category}
                             </h3>
-                            <div className="flex flex-wrap gap-8">
+                            <div className="flex flex-wrap gap-6 md:gap-8">
                                 {skillGroup.items.map((tech, techIdx) => {
-                                    const { icon: Icon, color } = getTechConfig(tech);
+                                    const techConfig = getTechConfig(tech);
+                                    if (!techConfig) return null;
+                                    const { icon: Icon, color } = techConfig;
                                     return (
                                         <div
                                             key={techIdx}
                                             className="group flex flex-col items-center gap-3 cursor-pointer select-none active:scale-95 transition-transform"
                                         >
                                             <div
-                                                className="w-20 h-20 flex items-center justify-center bg-zinc-900 border border-zinc-800 rounded-xl group-hover:scale-110 group-active:scale-110 transition-transform duration-200 shadow-lg group-hover:shadow-[0_0_20px_var(--hover-shadow-color)] group-active:shadow-[0_0_20px_var(--hover-shadow-color)] group-hover:border-(--hover-shadow-color) group-active:border-(--hover-shadow-color)"
+                                                className="w-18 h-18 md:w-20 md:h-20 flex items-center justify-center bg-zinc-900 border border-white/10 rounded-lg group-hover:scale-105 group-active:scale-105 transition-transform duration-200 shadow-lg group-hover:shadow-[0_0_20px_var(--hover-shadow-color)] group-active:shadow-[0_0_20px_var(--hover-shadow-color)] group-hover:border-(--hover-shadow-color) group-active:border-(--hover-shadow-color)"
                                                 style={{
                                                     "--hover-shadow-color": color
                                                 }}

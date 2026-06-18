@@ -175,7 +175,7 @@ const RetroBackground = () => {
                 <div className="w-full h-full bg-transparent border-t border-[#FF00FF]/50 grid-floor" />
             </div>
 
-            <style jsx>{`
+            <style>{`
                 /* ===== Rainbow Color Cycling ===== */
 
                 /* Sun + petals cycle together */
