@@ -37,11 +37,6 @@ const Hero = () => {
                         transition={{ duration: 0.7 }}
                         className="flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-1 max-w-2xl"
                     >
-                        <div className="mb-5 inline-flex items-center gap-2 border border-[#00FFFF]/30 bg-black/70 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-[#00FFFF] shadow-[0_0_24px_rgba(0,255,255,0.12)]">
-                            <MapPin size={14} />
-                            Jakarta - Taipei
-                        </div>
-
                         <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-6 tracking-tight leading-none select-none text-white drop-shadow-[0_0_18px_rgba(255,255,255,0.35)]">
                             FATHAN
                             <br />
@@ -102,8 +97,13 @@ const Hero = () => {
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.7, delay: 0.2 }}
-                        className="order-1 lg:order-2 flex flex-col items-center gap-8"
+                        className="order-1 lg:order-2 flex flex-col items-center gap-5 lg:gap-8"
                     >
+                        <div className="inline-flex items-center gap-2 border border-[#00FFFF]/30 bg-black/70 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-[#00FFFF] shadow-[0_0_24px_rgba(0,255,255,0.12)]">
+                            <MapPin size={14} />
+                            Jakarta - Taipei
+                        </div>
+
                         {/* Profile Picture with Tap Toggle on Mobile */}
                         <div
                             className="w-64 h-64 md:w-80 md:h-80 relative group cursor-pointer"
