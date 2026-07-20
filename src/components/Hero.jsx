@@ -9,7 +9,7 @@ const Hero = () => {
 
     const sequence = useMemo(() => [
         () => setTextColor('text-[#FFFF00]'), // Yellow for UI
-        '> COMPUTER ENGINEERING \n@ UNIVERSITAS INDONESIA',
+        '> 4TH YEAR COMPUTER ENGINEERING \n@ UNIVERSITAS INDONESIA',
         2000,
         '', // Ensure deletion finishes before color change
         () => setTextColor('text-[#00FFFF]'), // Cyan for NTUST
@@ -17,7 +17,7 @@ const Hero = () => {
         2000,
         '',
         () => setTextColor('text-[#39FF14]'), // Green for Pharos
-        '> AI, MECHATRONICS & FULL-STACK INTERN \n@ PT. PHAROS INDONESIA',
+        '> EX-AI, MECHATRONICS & FULL-STACK INTERN \n@ PT. PHAROS INDONESIA',
         2000,
         ''
     ], []);
@@ -60,7 +60,7 @@ const Hero = () => {
 
                         <p className="text-white text-lg md:text-xl max-w-xl leading-relaxed font-sans mt-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
                             Hi there! My nickname is <strong className="text-[#FF3131]">Ifan</strong>. I'm a computer engineering student from <strong className="text-[#FFFF00]">Universitas Indonesia</strong> building across <strong>software</strong>, <strong>AI</strong>, and <strong>embedded systems</strong>.
-                            Recently I finished an AI, mechatronics, and full-stack internship at <strong className="text-[#39FF14]">PT. Pharos Indonesia</strong>, and I am currently doing O-RAN research with <strong className="text-[#00FFFF]">BMW Lab in NTUST</strong> Taiwan through the TEEP Program.
+                            Recently I finished an AI, mechatronics, and full-stack internship at <strong className="text-[#39FF14]">PT. Pharos Indonesia</strong>, and I am currently doing O-RAN & 5G/B5G networks research with <strong className="text-[#00FFFF]">BMW Lab in NTUST</strong> Taiwan through the TEEP Program.
                         </p>
 
                         {/* Mobile Buttons (Smaller & Below Bio) */}
