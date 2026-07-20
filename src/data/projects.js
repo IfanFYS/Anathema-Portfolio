@@ -1,5 +1,14 @@
 export const projects = [
     {
+        slug: "oasis-water-purification",
+        title: "O.A.S.I.S.",
+        desc: "Portable off-grid water purification system for post-disaster use, integrating RO filtration, ESP32-based pH/turbidity sensing, adaptive sanitation/drinking-water routing, and offline local monitoring.",
+        stack: "ESP32, IoT, Power Electronics, RO Filtration",
+        tag: "Capstone",
+        color: "#FACC15",
+        images: ["oasis-1.png", "oasis-2.png"]
+    },
+    {
         slug: "autoreject-blister",
         title: "Autoreject Blister",
         desc: "Computer vision and mechatronics QC system for pharmaceutical blister packs using YOLO detection, editable ROIs, lane logic, CLAHE preprocessing, counters, audit trails, and Arduino rejector integration.",
