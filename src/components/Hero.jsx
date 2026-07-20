@@ -17,7 +17,7 @@ const Hero = () => {
         2000,
         '',
         () => setTextColor('text-[#39FF14]'), // Green for Pharos
-        '> EX-AI, MECHATRONICS & FULL-STACK INTERN \n@ PT. PHAROS INDONESIA',
+        '> EX-AI & MECHATRONICS INTERN \n@ PT. PHAROS INDONESIA',
         2000,
         ''
     ], []);
