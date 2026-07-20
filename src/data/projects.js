@@ -50,7 +50,7 @@ export const projects = [
         desc: "Real-time multiplayer drawing and guessing game with live socket connections.",
         stack: "React, Express.js, PostgreSQL, Socket.io",
         tag: "Fullstack Game",
-        color: "#FACC15",
+        color: "#A855F7",
         images: ["draw-battle-game.png"]
     },
     {

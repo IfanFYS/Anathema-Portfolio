@@ -5,6 +5,7 @@ import { Cpu, Gamepad2, Globe, Terminal, ChevronLeft, ChevronRight } from "lucid
 const ProjectCard = ({ title, desc, stack, tag, color = "#00FFFF", slug, images }) => {
     const [failedSrcs, setFailedSrcs] = useState(() => new Set());
     const [currentImgIndex, setCurrentImgIndex] = useState(0);
+    const [slideDirection, setSlideDirection] = useState(1);
     const [isHovered, setIsHovered] = useState(false);
     const [hasMounted, setHasMounted] = useState(false);
 
@@ -18,6 +19,11 @@ const ProjectCard = ({ title, desc, stack, tag, color = "#00FFFF", slug, images 
     const activeImageIndex = hasImages ? currentImgIndex % availableImages.length : 0;
     const activeImageSrc = availableImages[activeImageIndex];
     const hasMultipleImages = availableImages.length > 1;
+    const slideVariants = {
+        enter: (direction) => ({ x: direction > 0 ? "100%" : "-100%" }),
+        center: { x: 0 },
+        exit: (direction) => ({ x: direction > 0 ? "-100%" : "100%" })
+    };
 
     useEffect(() => {
         setHasMounted(true);
@@ -40,22 +46,35 @@ const ProjectCard = ({ title, desc, stack, tag, color = "#00FFFF", slug, images 
         let interval;
         if (isHovered && hasMultipleImages) {
             interval = setInterval(() => {
+                setSlideDirection(1);
                 setCurrentImgIndex((prev) => (prev + 1) % availableImages.length);
             }, 3000); // Slower automatic switch
-        } else {
-            if (!isHovered) setCurrentImgIndex(0);
         }
         return () => clearInterval(interval);
-    }, [availableImages.length, hasMultipleImages, isHovered]);
+    }, [activeImageIndex, availableImages.length, hasMultipleImages, isHovered]);
 
     const nextImage = (e) => {
         e.stopPropagation();
+        setSlideDirection(1);
         setCurrentImgIndex((prev) => (prev + 1) % availableImages.length);
     };
 
     const prevImage = (e) => {
         e.stopPropagation();
+        setSlideDirection(-1);
         setCurrentImgIndex((prev) => (prev - 1 + availableImages.length) % availableImages.length);
+    };
+
+    const handleDragEnd = (_, info) => {
+        if (!hasMultipleImages) return;
+
+        if (info.offset.x < -50 || info.velocity.x < -500) {
+            setSlideDirection(1);
+            setCurrentImgIndex((prev) => (prev + 1) % availableImages.length);
+        } else if (info.offset.x > 50 || info.velocity.x > 500) {
+            setSlideDirection(-1);
+            setCurrentImgIndex((prev) => (prev - 1 + availableImages.length) % availableImages.length);
+        }
     };
 
     const handleImageError = (src) => {
@@ -96,13 +115,19 @@ const ProjectCard = ({ title, desc, stack, tag, color = "#00FFFF", slug, images 
                     <>
                         {hasMultipleImages ? (
                             <>
-                                <AnimatePresence initial={false}>
+                                <AnimatePresence initial={false} custom={slideDirection}>
                                     <motion.div
                                         key={activeImageSrc}
-                                        initial={hasMounted ? { x: "100%" } : false}
-                                        animate={{ x: 0 }}
-                                        exit={{ x: "-100%" }}
+                                        custom={slideDirection}
+                                        variants={slideVariants}
+                                        initial={hasMounted ? "enter" : false}
+                                        animate="center"
+                                        exit="exit"
                                         transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                                        drag="x"
+                                        dragConstraints={{ left: 0, right: 0 }}
+                                        dragElastic={0.12}
+                                        onDragEnd={handleDragEnd}
                                         className="absolute inset-0 w-full h-full"
                                     >
                                         <img

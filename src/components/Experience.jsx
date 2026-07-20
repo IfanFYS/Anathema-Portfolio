@@ -104,9 +104,15 @@ const experiences = [
 const ExperienceCard = ({ exp }) => {
     const [isHovered, setIsHovered] = useState(false);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [slideDirection, setSlideDirection] = useState(1);
     const [hasMounted, setHasMounted] = useState(false);
     const imageList = useMemo(() => exp.images || [exp.image || `/assets/experience/${exp.slug}.jpg`], [exp]);
     const hasMultipleImages = imageList.length > 1;
+    const slideVariants = {
+        enter: (direction) => ({ x: direction > 0 ? "100%" : "-100%" }),
+        center: { x: 0 },
+        exit: (direction) => ({ x: direction > 0 ? "-100%" : "100%" })
+    };
 
     useEffect(() => {
         setHasMounted(true);
@@ -116,20 +122,35 @@ const ExperienceCard = ({ exp }) => {
         if (!hasMultipleImages) return undefined;
 
         const intervalId = window.setInterval(() => {
+            setSlideDirection(1);
             setCurrentImageIndex((prev) => (prev + 1) % imageList.length);
         }, 4500);
 
         return () => window.clearInterval(intervalId);
-    }, [hasMultipleImages, imageList.length]);
+    }, [currentImageIndex, hasMultipleImages, imageList.length]);
 
     const showPreviousImage = (event) => {
         event.stopPropagation();
+        setSlideDirection(-1);
         setCurrentImageIndex((prev) => (prev - 1 + imageList.length) % imageList.length);
     };
 
     const showNextImage = (event) => {
         event.stopPropagation();
+        setSlideDirection(1);
         setCurrentImageIndex((prev) => (prev + 1) % imageList.length);
+    };
+
+    const handleDragEnd = (_, info) => {
+        if (!hasMultipleImages) return;
+
+        if (info.offset.x < -50 || info.velocity.x < -500) {
+            setSlideDirection(1);
+            setCurrentImageIndex((prev) => (prev + 1) % imageList.length);
+        } else if (info.offset.x > 50 || info.velocity.x > 500) {
+            setSlideDirection(-1);
+            setCurrentImageIndex((prev) => (prev - 1 + imageList.length) % imageList.length);
+        }
     };
 
     return (
@@ -141,13 +162,19 @@ const ExperienceCard = ({ exp }) => {
         >
             <div className="w-full aspect-video bg-zinc-900 mb-4 overflow-hidden relative rounded-md">
                 <div className={`absolute inset-0 bg-[#00FFFF]/10 mix-blend-overlay z-10 transition-opacity ${isHovered ? "opacity-100" : "opacity-0"}`} />
-                <AnimatePresence initial={false}>
+                <AnimatePresence initial={false} custom={slideDirection}>
                     <motion.div
                         key={currentImageIndex}
-                        initial={hasMounted ? { x: "100%" } : false}
-                        animate={{ x: 0 }}
-                        exit={{ x: "-100%" }}
+                        custom={slideDirection}
+                        variants={slideVariants}
+                        initial={hasMounted ? "enter" : false}
+                        animate="center"
+                        exit="exit"
                         transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                        drag="x"
+                        dragConstraints={{ left: 0, right: 0 }}
+                        dragElastic={0.12}
+                        onDragEnd={handleDragEnd}
                         className="absolute inset-0 h-full w-full"
                     >
                         <img
@@ -190,6 +217,11 @@ const ExperienceCard = ({ exp }) => {
                                     aria-label={`Show experience photo ${index + 1}`}
                                     onClick={(event) => {
                                         event.stopPropagation();
+                                        if (index === currentImageIndex) return;
+
+                                        const forwardDistance = (index - currentImageIndex + imageList.length) % imageList.length;
+                                        const backwardDistance = (currentImageIndex - index + imageList.length) % imageList.length;
+                                        setSlideDirection(forwardDistance <= backwardDistance ? 1 : -1);
                                         setCurrentImageIndex(index);
                                     }}
                                     className={`h-1.5 w-1.5 rounded-full transition-colors ${index === currentImageIndex ? "bg-white" : "bg-white/35"}`}
