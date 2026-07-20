@@ -241,9 +241,6 @@ const Experience = () => {
                 <h2 className="text-4xl md:text-6xl font-black mb-6 text-center uppercase tracking-tight text-white drop-shadow-[0_0_18px_rgba(255,255,255,0.35)]">
                     Level Progression
                 </h2>
-                <p className="text-center text-slate-300 max-w-2xl mx-auto mb-20 leading-relaxed">
-                    Current research, completed industry work, and campus leadership milestones.
-                </p>
 
                 <div className="relative">
                     <div className="absolute left-[28px] md:left-1/2 top-0 bottom-0 w-px bg-linear-to-b from-[#00FFFF] via-[#FF00FF] to-[#39FF14] transform -translate-x-1/2 shadow-[0_0_10px_#FF00FF]" />
