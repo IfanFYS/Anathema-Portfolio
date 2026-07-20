@@ -9,11 +9,11 @@ const experiences = [
         period: "Jan 2026 - Present",
         active: true,
         slug: "bmw-ntust",
-        image: "/assets/experience/bmw-ntust.png",
+        image: "/assets/experience/bmw-ntust-photo.jpeg",
         desc: [
-            "Completed O-RAN probation research interconnecting OSC SMO and FlexRIC over O1, A1, and E2 interfaces for AI-driven QoS optimization.",
-            "Built OAI PRACH simulator and RFsim baselines, mapped gNB PRACH threshold paths, and analyzed PRACH attack surfaces for OpenAirInterface and NVIDIA Aerial RAN.",
-            "Preparing the on-site Taiwan research phase from June to August 2026 to adapt PRACH attacker work to Aerial OTA RAN."
+            "Completed remote O-RAN research interconnecting OSC SMO and FlexRIC over O1, A1, and E2 interfaces for AI-driven QoS optimization, validating 29/29 integration tests.",
+            "Built OAI PRACH simulator and RFsim baselines, mapped gNB detection thresholds, and developed a context-aware mitigation pipeline for log extraction, policy replay, and sensitivity testing with 44 passing tests.",
+            "Reproduced controlled PRACH attacker runs on an on-site OAI UE/gNB testbed with USRP B210 hardware, resolving launch dependencies and preserving repeatable configuration, execution, and cleanup evidence."
         ]
     },
     {
