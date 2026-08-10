@@ -180,7 +180,7 @@ const ExperienceCard = ({ exp }) => {
                         <img
                             src={imageList[currentImageIndex]}
                             alt={exp.company}
-                            className={`w-full h-full object-cover transition-all duration-500 ${isHovered ? "grayscale-0 scale-[1.02]" : "grayscale"}`}
+                            className={`w-full h-full object-cover transition-all duration-500 ${isHovered ? "scale-[1.02]" : ""}`}
                             onError={(e) => {
                                 e.currentTarget.style.display = "none";
                                 e.currentTarget.parentElement.nextSibling.style.display = "flex";

@@ -13,7 +13,7 @@ const Hero = () => {
         2000,
         '', // Ensure deletion finishes before color change
         () => setTextColor('text-[#00FFFF]'), // Cyan for NTUST
-        '> RESEARCH INTERN \n@ BMW LAB NTUST',
+        '> 5G NETWORKS & CYBERSEC INTERN \n@ BMW LAB NTUST',
         2000,
         '',
         () => setTextColor('text-[#39FF14]'), // Green for Pharos
@@ -116,9 +116,9 @@ const Hero = () => {
 
                             {/* The Image */}
                             <img
-                                src="/assets/profile1.jpg"
+                                src="/assets/profile_1.jpg"
                                 alt="Fathan Yazid Satriani"
-                                className={`w-full h-full object-cover rounded-lg border border-white/20 relative z-10 bg-zinc-900 shadow-2xl transition-all duration-500 ${isProfileHovered ? 'grayscale-0' : 'grayscale group-hover:grayscale-0'}`}
+                                className="w-full h-full object-cover rounded-lg border border-white/20 relative z-10 bg-zinc-900 shadow-2xl transition-all duration-500"
                             />
 
                             {/* Corner Accents */}
