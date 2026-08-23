@@ -13,7 +13,7 @@ const Hero = () => {
         2000,
         '', // Ensure deletion finishes before color change
         () => setTextColor('text-[#00FFFF]'), // Cyan for NTUST
-        '> 5G NETWORKS & CYBERSEC INTERN \n@ BMW LAB NTUST',
+        '> EX-5G NETWORKS & CYBERSEC INTERN \n@ BMW LAB NTUST',
         2000,
         '',
         () => setTextColor('text-[#39FF14]'), // Green for Pharos
@@ -60,7 +60,7 @@ const Hero = () => {
 
                         <p className="text-white text-lg md:text-xl max-w-xl leading-relaxed font-sans mt-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
                             Hi there! My nickname is <strong className="text-[#FF3131]">Ifan</strong>. I'm a computer engineering student from <strong className="text-[#FFFF00]">Universitas Indonesia</strong> building across <strong>software</strong>, <strong>AI</strong>, and <strong>embedded systems</strong>.
-                            Recently I finished an AI, mechatronics, and full-stack internship at <strong className="text-[#39FF14]">PT. Pharos Indonesia</strong>, and I am currently doing O-RAN & 5G/B5G networks research with <strong className="text-[#00FFFF]">BMW Lab in NTUST</strong> Taiwan through the TEEP Program.
+                            I have completed internships spanning AI, mechatronics, and full-stack software at <strong className="text-[#39FF14]">PT. Pharos Indonesia</strong>, and O-RAN & 5G/B5G network security research with <strong className="text-[#00FFFF]">BMW Lab in NTUST</strong> Taiwan through the TEEP Program.
                         </p>
 
                         {/* Mobile Buttons (Smaller & Below Bio) */}

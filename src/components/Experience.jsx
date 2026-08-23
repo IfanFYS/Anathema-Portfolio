@@ -6,14 +6,14 @@ const experiences = [
     {
         role: "Research Intern (TEEP Program)",
         company: "BMW Lab, NTUST",
-        period: "Jan 2026 - Present",
-        active: true,
+        period: "Jun 2026 - Aug 2026",
+        active: false,
         slug: "bmw-ntust",
         image: "/assets/experience/bmw-ntust-photo.jpeg",
         desc: [
-            "Completed remote O-RAN research interconnecting OSC SMO and FlexRIC over O1, A1, and E2 interfaces for AI-driven QoS optimization, validating 29/29 integration tests.",
-            "Built OAI PRACH simulator and RFsim baselines, mapped gNB detection thresholds, and developed a context-aware mitigation pipeline for log extraction, policy replay, and sensitivity testing with 44 passing tests.",
-            "Reproduced controlled PRACH attacker runs on an on-site OAI UE/gNB testbed with USRP B210 hardware, resolving launch dependencies and preserving repeatable configuration, execution, and cleanup evidence."
+            "Completed six months of remote research, beginning with OSC SMO-FlexRIC integration over O1, A1, and E2 interfaces and progressing to OAI/NVIDIA Aerial PRACH security analysis, simulation, and RFsim baselines.",
+            "Reproduced and analyzed PRACH attacker behavior across five authorized Open RAN experiment paths using OAI, OCUDU, USRP B210, Pegatron O-RU, MTK UE/ELT, and NVIDIA Aerial L1.",
+            "Executed end-to-end attack detection and mitigation on an OAI UE/gNB testbed, integrating the O1 adapter, rApp, ROMF, WebUI, and K9s controller workflow while preserving evidence-bounded results."
         ]
     },
     {
