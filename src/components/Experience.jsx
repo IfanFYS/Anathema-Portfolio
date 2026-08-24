@@ -9,7 +9,7 @@ const experiences = [
         period: "Jun 2026 - Aug 2026",
         active: false,
         slug: "bmw-ntust",
-        image: "/assets/experience/bmw-ntust-photo.jpeg",
+        image: "/assets/experience/bmw-ntust-me.jpg",
         desc: [
             "Completed six months of remote research, beginning with OSC SMO-FlexRIC integration over O1, A1, and E2 interfaces and progressing to OAI/NVIDIA Aerial PRACH security analysis, simulation, and RFsim baselines.",
             "Reproduced and analyzed PRACH attacker behavior across five authorized Open RAN experiment paths using OAI, OCUDU, USRP B210, Pegatron O-RU, MTK UE/ELT, and NVIDIA Aerial L1.",
