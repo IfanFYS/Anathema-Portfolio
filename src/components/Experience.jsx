@@ -9,7 +9,7 @@ const experiences = [
         period: "Jun 2026 - Aug 2026",
         active: false,
         slug: "bmw-ntust",
-        image: "/assets/experience/bmw-ntust-me.jpg",
+        image: "/assets/experience/bmw-ntust-me-16x9.jpg",
         desc: [
             "Completed six months of remote research, beginning with OSC SMO-FlexRIC integration over O1, A1, and E2 interfaces and progressing to OAI/NVIDIA Aerial PRACH security analysis, simulation, and RFsim baselines.",
             "Reproduced and analyzed PRACH attacker behavior across five authorized Open RAN experiment paths using OAI, OCUDU, USRP B210, Pegatron O-RU, MTK UE/ELT, and NVIDIA Aerial L1.",
@@ -279,11 +279,7 @@ const Experience = () => {
 
                     <div className="flex flex-col gap-12 md:gap-0">
                         {experiences.map((exp, idx) => (
-                            <motion.div
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, margin: "-50px" }}
-                                transition={{ duration: 0.4, delay: idx * 0.05 }}
+                            <div
                                 key={exp.role}
                                 className={`flex flex-col md:flex-row items-center gap-8 ${idx % 2 === 0 ? "md:flex-row-reverse" : ""} ${idx !== 0 ? "md:-mt-28" : ""}`}
                             >
@@ -296,7 +292,7 @@ const Experience = () => {
                                 </div>
 
                                 <div className="hidden md:block w-5/12" />
-                            </motion.div>
+                            </div>
                         ))}
                     </div>
                 </div>

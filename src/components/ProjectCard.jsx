@@ -99,13 +99,13 @@ const ProjectCard = ({ title, desc, stack, tag, color = "#00FFFF", slug, images 
             onHoverEnd={() => setIsHovered(false)}
             onTap={() => setIsHovered(!isHovered)}
             whileHover={{ y: -5, scale: 1.02 }}
-            transition={{ duration: 0.2 }}
-            className={`group relative bg-black/90 border rounded-lg flex flex-col transition-all duration-300 overflow-hidden h-full backdrop-blur-sm ${isHovered ? 'border-[currentColor]' : 'border-white/10'}`}
+            transition={{ duration: 0.1 }}
+            className={`group relative bg-black/90 border rounded-lg flex flex-col transition-all duration-100 overflow-hidden h-full backdrop-blur-sm ${isHovered ? 'border-[currentColor]' : 'border-white/10'}`}
             style={{ borderColor: isHovered ? color : undefined }}
         >
             {/* Intense Glow on Hover */}
             <div
-                className={`absolute inset-0 transition-opacity duration-300 pointer-events-none z-[-1] ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+                className={`absolute inset-0 transition-opacity duration-100 pointer-events-none z-[-1] ${isHovered ? 'opacity-100' : 'opacity-0'}`}
                 style={{ boxShadow: `0 0 40px ${color}40` }}
             />
 
@@ -133,7 +133,7 @@ const ProjectCard = ({ title, desc, stack, tag, color = "#00FFFF", slug, images 
                                         <img
                                             src={activeImageSrc}
                                             alt={title}
-                                            className="w-full h-full object-cover transition-all duration-300"
+                                            className="w-full h-full object-cover transition-all duration-100"
                                             onError={() => handleImageError(activeImageSrc)}
                                             loading="eager"
                                         />
@@ -143,14 +143,14 @@ const ProjectCard = ({ title, desc, stack, tag, color = "#00FFFF", slug, images 
                                 {/* Manual Controls */}
                                 <button
                                     onClick={prevImage}
-                                    className={`absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white p-1 rounded transition-opacity z-30 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+                                    className={`absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white p-1 rounded transition-opacity duration-100 z-30 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
                                     aria-label="Previous project image"
                                 >
                                     <ChevronLeft size={20} />
                                 </button>
                                 <button
                                     onClick={nextImage}
-                                    className={`absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white p-1 rounded transition-opacity z-30 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+                                    className={`absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white p-1 rounded transition-opacity duration-100 z-30 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
                                     aria-label="Next project image"
                                 >
                                     <ChevronRight size={20} />
@@ -160,7 +160,7 @@ const ProjectCard = ({ title, desc, stack, tag, color = "#00FFFF", slug, images 
                             <img
                                 src={activeImageSrc}
                                 alt={title}
-                                className="w-full h-full object-cover transition-all duration-300 absolute inset-0"
+                                className="w-full h-full object-cover transition-all duration-100 absolute inset-0"
                                 onError={() => handleImageError(activeImageSrc)}
                                 loading="eager"
                             />
@@ -198,7 +198,7 @@ const ProjectCard = ({ title, desc, stack, tag, color = "#00FFFF", slug, images 
 
             <div className="p-6 flex flex-col grow">
                 <h3
-                    className="text-xl md:text-2xl font-black mb-3 uppercase tracking-tight transition-colors duration-300"
+                    className="text-xl md:text-2xl font-black mb-3 uppercase tracking-tight transition-colors duration-100"
                     style={{
                         color: isHovered ? color : 'white',
                         textShadow: `2px 2px 0px ${color}40`
@@ -208,7 +208,7 @@ const ProjectCard = ({ title, desc, stack, tag, color = "#00FFFF", slug, images 
                     {title}
                 </h3>
 
-                <p className={`text-slate-400 mb-6 font-mono text-xs leading-relaxed border-l-2 pl-4 grow transition-colors line-clamp-3 ${isHovered ? 'border-white' : 'border-white/10'}`}>
+                <p className={`text-slate-400 mb-6 font-mono text-xs leading-relaxed border-l-2 pl-4 grow transition-colors duration-100 line-clamp-3 ${isHovered ? 'border-white' : 'border-white/10'}`}>
                     {desc}
                 </p>
 
@@ -216,7 +216,7 @@ const ProjectCard = ({ title, desc, stack, tag, color = "#00FFFF", slug, images 
                     {stack.split(', ').slice(0, 4).map((tech, idx) => (
                         <span
                             key={idx}
-                            className={`text-[10px] font-bold uppercase tracking-widest text-slate-500 bg-zinc-900 px-2 py-1 border transition-colors ${isHovered ? 'border-slate-500' : 'border-white/10'}`}
+                            className={`text-[10px] font-bold uppercase tracking-widest text-slate-500 bg-zinc-900 px-2 py-1 border transition-colors duration-100 ${isHovered ? 'border-slate-500' : 'border-white/10'}`}
                         >
                             {tech}
                         </span>
