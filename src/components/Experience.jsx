@@ -52,13 +52,15 @@ const experiences = [
         ]
     },
     {
-        role: "Teaching Assistant (Computational Thinking)",
+        role: "Teaching Assistant",
         company: "Universitas Indonesia",
-        period: "Feb 2025 - Jun 2025",
+        period: "Feb 2025 - Jan 2026",
         active: false,
         slug: "ta-comthinking",
+        image: "/assets/experience/teaching-assistant-zoom.png",
         desc: [
-            "Mentored and graded students in algorithmic logic and Python programming for the Computational Thinking course."
+            "Mentored and graded students in algorithmic logic and Python programming for the Computational Thinking course.",
+            "Supported Electrical Circuits instruction and helped students develop their circuit-analysis skills."
         ]
     },
     {
