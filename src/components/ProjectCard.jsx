@@ -1,13 +1,14 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Cpu, Gamepad2, Globe, Terminal, ChevronLeft, ChevronRight } from "lucide-react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Cpu, Gamepad2, Globe, Terminal, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 
-const ProjectCard = ({ title, desc, stack, tag, color = "#00FFFF", slug, images }) => {
+const ProjectCard = ({ title, desc, stack, tag, color = "#00FFFF", slug, images, url }) => {
     const [failedSrcs, setFailedSrcs] = useState(() => new Set());
     const [currentImgIndex, setCurrentImgIndex] = useState(0);
     const [slideDirection, setSlideDirection] = useState(1);
+    const [isTransitioning, setIsTransitioning] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
-    const [hasMounted, setHasMounted] = useState(false);
+    const touchStartX = useRef(null);
 
     const getImageSrc = (image) => image.startsWith("/") ? image : `/assets/projects/${image}`;
     const imageSources = useMemo(() => {
@@ -16,18 +17,16 @@ const ProjectCard = ({ title, desc, stack, tag, color = "#00FFFF", slug, images 
     }, [images, slug]);
     const availableImages = imageSources.filter((src) => !failedSrcs.has(src));
     const hasImages = availableImages.length > 0;
-    const activeImageIndex = hasImages ? currentImgIndex % availableImages.length : 0;
+    const activeImageIndex = hasImages ? Math.min(currentImgIndex, availableImages.length - 1) : 0;
     const activeImageSrc = availableImages[activeImageIndex];
     const hasMultipleImages = availableImages.length > 1;
+    const isFirstImage = activeImageIndex === 0;
+    const isLastImage = activeImageIndex === availableImages.length - 1;
     const slideVariants = {
         enter: (direction) => ({ x: direction > 0 ? "100%" : "-100%" }),
         center: { x: 0 },
         exit: (direction) => ({ x: direction > 0 ? "-100%" : "100%" })
     };
-
-    useEffect(() => {
-        setHasMounted(true);
-    }, []);
 
     useEffect(() => {
         setFailedSrcs(new Set());
@@ -41,40 +40,46 @@ const ProjectCard = ({ title, desc, stack, tag, color = "#00FFFF", slug, images 
         });
     }, [imageSources]);
 
-    // Slideshow Logic: Cycle images on hover
     useEffect(() => {
-        let interval;
-        if (isHovered && hasMultipleImages) {
-            interval = setInterval(() => {
-                setSlideDirection(1);
-                setCurrentImgIndex((prev) => (prev + 1) % availableImages.length);
-            }, 3000); // Slower automatic switch
-        }
-        return () => clearInterval(interval);
-    }, [activeImageIndex, availableImages.length, hasMultipleImages, isHovered]);
+        if (!isHovered || !hasMultipleImages || isLastImage || isTransitioning) return undefined;
+
+        const timeout = window.setTimeout(() => {
+            setSlideDirection(1);
+            setIsTransitioning(true);
+            setCurrentImgIndex((prev) => Math.min(prev + 1, availableImages.length - 1));
+        }, 2000);
+
+        return () => window.clearTimeout(timeout);
+    }, [availableImages.length, hasMultipleImages, isHovered, isLastImage, isTransitioning]);
 
     const nextImage = (e) => {
-        e.stopPropagation();
+        e?.stopPropagation();
+        if (isLastImage || isTransitioning) return;
         setSlideDirection(1);
-        setCurrentImgIndex((prev) => (prev + 1) % availableImages.length);
+        setIsTransitioning(true);
+        setCurrentImgIndex((prev) => Math.min(prev + 1, availableImages.length - 1));
     };
 
     const prevImage = (e) => {
-        e.stopPropagation();
+        e?.stopPropagation();
+        if (isFirstImage || isTransitioning) return;
         setSlideDirection(-1);
-        setCurrentImgIndex((prev) => (prev - 1 + availableImages.length) % availableImages.length);
+        setIsTransitioning(true);
+        setCurrentImgIndex((prev) => Math.max(prev - 1, 0));
     };
 
-    const handleDragEnd = (_, info) => {
-        if (!hasMultipleImages) return;
+    const handleTouchStart = (event) => {
+        touchStartX.current = event.touches[0].clientX;
+    };
 
-        if (info.offset.x < -50 || info.velocity.x < -500) {
-            setSlideDirection(1);
-            setCurrentImgIndex((prev) => (prev + 1) % availableImages.length);
-        } else if (info.offset.x > 50 || info.velocity.x > 500) {
-            setSlideDirection(-1);
-            setCurrentImgIndex((prev) => (prev - 1 + availableImages.length) % availableImages.length);
-        }
+    const handleTouchEnd = (event) => {
+        if (!hasMultipleImages || touchStartX.current === null) return;
+
+        const distance = event.changedTouches[0].clientX - touchStartX.current;
+        touchStartX.current = null;
+
+        if (distance > 50) nextImage();
+        if (distance < -50) prevImage();
     };
 
     const handleImageError = (src) => {
@@ -115,25 +120,24 @@ const ProjectCard = ({ title, desc, stack, tag, color = "#00FFFF", slug, images 
                     <>
                         {hasMultipleImages ? (
                             <>
-                                <AnimatePresence initial={false} custom={slideDirection}>
+                                <AnimatePresence initial={false} custom={slideDirection} mode="popLayout">
                                     <motion.div
                                         key={activeImageSrc}
                                         custom={slideDirection}
                                         variants={slideVariants}
-                                        initial={hasMounted ? "enter" : false}
+                                        initial="enter"
                                         animate="center"
                                         exit="exit"
-                                        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                                        drag="x"
-                                        dragConstraints={{ left: 0, right: 0 }}
-                                        dragElastic={0.12}
-                                        onDragEnd={handleDragEnd}
-                                        className="absolute inset-0 w-full h-full"
+                                        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                                        onAnimationComplete={() => setIsTransitioning(false)}
+                                        className="absolute inset-0 h-full w-full touch-pan-y"
+                                        onTouchStart={handleTouchStart}
+                                        onTouchEnd={handleTouchEnd}
                                     >
                                         <img
                                             src={activeImageSrc}
-                                            alt={title}
-                                            className="w-full h-full object-cover transition-all duration-100"
+                                            alt={`${title} preview ${activeImageIndex + 1}`}
+                                            className="h-full w-full object-cover"
                                             onError={() => handleImageError(activeImageSrc)}
                                             loading="eager"
                                         />
@@ -143,14 +147,16 @@ const ProjectCard = ({ title, desc, stack, tag, color = "#00FFFF", slug, images 
                                 {/* Manual Controls */}
                                 <button
                                     onClick={prevImage}
-                                    className={`absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white p-1 rounded transition-opacity duration-100 z-30 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+                                    disabled={isFirstImage || isTransitioning}
+                                    className={`absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-1 rounded transition-opacity duration-100 z-30 ${isHovered ? 'opacity-100' : 'opacity-0'} ${isFirstImage || isTransitioning ? 'cursor-not-allowed !opacity-25' : 'hover:bg-black/80'}`}
                                     aria-label="Previous project image"
                                 >
                                     <ChevronLeft size={20} />
                                 </button>
                                 <button
                                     onClick={nextImage}
-                                    className={`absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white p-1 rounded transition-opacity duration-100 z-30 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+                                    disabled={isLastImage || isTransitioning}
+                                    className={`absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-1 rounded transition-opacity duration-100 z-30 ${isHovered ? 'opacity-100' : 'opacity-0'} ${isLastImage || isTransitioning ? 'cursor-not-allowed !opacity-25' : 'hover:bg-black/80'}`}
                                     aria-label="Next project image"
                                 >
                                     <ChevronRight size={20} />
@@ -197,18 +203,34 @@ const ProjectCard = ({ title, desc, stack, tag, color = "#00FFFF", slug, images 
             </div>
 
             <div className="p-6 flex flex-col grow">
-                <h3
-                    className="text-xl md:text-2xl font-black mb-3 uppercase tracking-tight transition-colors duration-100"
-                    style={{
-                        color: isHovered ? color : 'white',
-                        textShadow: `2px 2px 0px ${color}40`
-                    }}
-                    title={title}
-                >
-                    {title}
-                </h3>
+                <div className="mb-3 flex items-start justify-between gap-3">
+                    <h3
+                        className="text-xl md:text-2xl font-black uppercase tracking-tight transition-colors duration-100"
+                        style={{
+                            color: isHovered ? color : 'white',
+                            textShadow: `2px 2px 0px ${color}40`
+                        }}
+                        title={title}
+                    >
+                        {title}
+                    </h3>
+                    {url && (
+                        <a
+                            href={url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`Open ${title} project`}
+                            title={`Open ${title}`}
+                            onClick={(event) => event.stopPropagation()}
+                            className="mt-0.5 shrink-0 border border-white/15 p-2 text-slate-400 transition-colors duration-100 hover:text-white"
+                            style={{ borderColor: isHovered ? color : undefined, color: isHovered ? color : undefined }}
+                        >
+                            <ExternalLink size={17} />
+                        </a>
+                    )}
+                </div>
 
-                <p className={`text-slate-400 mb-6 font-mono text-xs leading-relaxed border-l-2 pl-4 grow transition-colors duration-100 line-clamp-3 ${isHovered ? 'border-white' : 'border-white/10'}`}>
+                <p className={`text-slate-400 mb-6 font-mono text-xs leading-relaxed border-l-2 pl-4 grow transition-colors duration-100 ${isHovered ? 'border-white' : 'border-white/10'}`}>
                     {desc}
                 </p>
 

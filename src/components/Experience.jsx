@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -105,9 +105,12 @@ const ExperienceCard = ({ exp }) => {
     const [isHovered, setIsHovered] = useState(false);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [slideDirection, setSlideDirection] = useState(1);
-    const [hasMounted, setHasMounted] = useState(false);
+    const [isTransitioning, setIsTransitioning] = useState(false);
+    const touchStartX = useRef(null);
     const imageList = useMemo(() => exp.images || [exp.image || `/assets/experience/${exp.slug}.jpg`], [exp]);
     const hasMultipleImages = imageList.length > 1;
+    const isFirstImage = currentImageIndex === 0;
+    const isLastImage = currentImageIndex === imageList.length - 1;
     const slideVariants = {
         enter: (direction) => ({ x: direction > 0 ? "100%" : "-100%" }),
         center: { x: 0 },
@@ -115,42 +118,53 @@ const ExperienceCard = ({ exp }) => {
     };
 
     useEffect(() => {
-        setHasMounted(true);
-    }, []);
+        if (!isHovered || !hasMultipleImages || isLastImage || isTransitioning) return undefined;
 
-    useEffect(() => {
-        if (!hasMultipleImages) return undefined;
-
-        const intervalId = window.setInterval(() => {
+        const timeoutId = window.setTimeout(() => {
             setSlideDirection(1);
-            setCurrentImageIndex((prev) => (prev + 1) % imageList.length);
-        }, 4500);
+            setIsTransitioning(true);
+            setCurrentImageIndex((prev) => Math.min(prev + 1, imageList.length - 1));
+        }, 2000);
 
-        return () => window.clearInterval(intervalId);
-    }, [currentImageIndex, hasMultipleImages, imageList.length]);
+        return () => window.clearTimeout(timeoutId);
+    }, [hasMultipleImages, imageList.length, isHovered, isLastImage, isTransitioning]);
 
     const showPreviousImage = (event) => {
-        event.stopPropagation();
+        event?.stopPropagation();
+        if (isFirstImage || isTransitioning) return;
         setSlideDirection(-1);
-        setCurrentImageIndex((prev) => (prev - 1 + imageList.length) % imageList.length);
+        setIsTransitioning(true);
+        setCurrentImageIndex((prev) => Math.max(prev - 1, 0));
     };
 
     const showNextImage = (event) => {
-        event.stopPropagation();
+        event?.stopPropagation();
+        if (isLastImage || isTransitioning) return;
         setSlideDirection(1);
-        setCurrentImageIndex((prev) => (prev + 1) % imageList.length);
+        setIsTransitioning(true);
+        setCurrentImageIndex((prev) => Math.min(prev + 1, imageList.length - 1));
     };
 
-    const handleDragEnd = (_, info) => {
-        if (!hasMultipleImages) return;
+    const showImage = (index, event) => {
+        event.stopPropagation();
+        if (index === currentImageIndex || isTransitioning) return;
+        setSlideDirection(index > currentImageIndex ? 1 : -1);
+        setIsTransitioning(true);
+        setCurrentImageIndex(index);
+    };
 
-        if (info.offset.x < -50 || info.velocity.x < -500) {
-            setSlideDirection(1);
-            setCurrentImageIndex((prev) => (prev + 1) % imageList.length);
-        } else if (info.offset.x > 50 || info.velocity.x > 500) {
-            setSlideDirection(-1);
-            setCurrentImageIndex((prev) => (prev - 1 + imageList.length) % imageList.length);
-        }
+    const handleTouchStart = (event) => {
+        touchStartX.current = event.touches[0].clientX;
+    };
+
+    const handleTouchEnd = (event) => {
+        if (!hasMultipleImages || touchStartX.current === null) return;
+
+        const distance = event.changedTouches[0].clientX - touchStartX.current;
+        touchStartX.current = null;
+
+        if (distance > 50) showNextImage();
+        if (distance < -50) showPreviousImage();
     };
 
     return (
@@ -160,44 +174,50 @@ const ExperienceCard = ({ exp }) => {
             onMouseLeave={() => setIsHovered(false)}
             onClick={() => setIsHovered(!isHovered)}
         >
-            <div className="w-full aspect-video bg-zinc-900 mb-4 overflow-hidden relative rounded-md">
+            <div
+                className="w-full aspect-video bg-zinc-900 mb-4 overflow-hidden relative rounded-md touch-pan-y"
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
+            >
                 <div className={`absolute inset-0 bg-[#00FFFF]/10 mix-blend-overlay z-10 transition-opacity ${isHovered ? "opacity-100" : "opacity-0"}`} />
-                <AnimatePresence initial={false} custom={slideDirection}>
+                <AnimatePresence initial={false} custom={slideDirection} mode="popLayout">
                     <motion.div
-                        key={currentImageIndex}
+                        key={imageList[currentImageIndex]}
                         custom={slideDirection}
                         variants={slideVariants}
-                        initial={hasMounted ? "enter" : false}
+                        initial="enter"
                         animate="center"
                         exit="exit"
-                        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                        drag="x"
-                        dragConstraints={{ left: 0, right: 0 }}
-                        dragElastic={0.12}
-                        onDragEnd={handleDragEnd}
+                        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                        onAnimationComplete={() => setIsTransitioning(false)}
                         className="absolute inset-0 h-full w-full"
                     >
                         <img
                             src={imageList[currentImageIndex]}
-                            alt={exp.company}
-                            className={`w-full h-full object-cover transition-all duration-500 ${isHovered ? "scale-[1.02]" : ""}`}
-                            onError={(e) => {
-                                e.currentTarget.style.display = "none";
-                                e.currentTarget.parentElement.nextSibling.style.display = "flex";
+                            alt={`${exp.company} photo ${currentImageIndex + 1}`}
+                            className={`h-full w-full object-cover transition-transform duration-100 ${isHovered ? "scale-[1.02]" : ""}`}
+                            onLoad={(event) => {
+                                event.currentTarget.style.display = "block";
+                                event.currentTarget.nextElementSibling.style.display = "none";
+                            }}
+                            onError={(event) => {
+                                event.currentTarget.style.display = "none";
+                                event.currentTarget.nextElementSibling.style.display = "flex";
                             }}
                         />
+                        <div className="hidden absolute inset-0 bg-zinc-900 items-center justify-center text-zinc-700 font-mono text-xs uppercase tracking-widest border border-dashed border-zinc-800">
+                            No Image Data
+                        </div>
                     </motion.div>
                 </AnimatePresence>
-                <div className="hidden absolute inset-0 bg-zinc-900 items-center justify-center text-zinc-700 font-mono text-xs uppercase tracking-widest border border-dashed border-zinc-800">
-                    No Image Data
-                </div>
                 {hasMultipleImages && (
                     <>
                         <button
                             type="button"
                             aria-label="Previous experience photo"
                             onClick={showPreviousImage}
-                            className={`absolute left-2 top-1/2 z-20 -translate-y-1/2 bg-black/70 border border-white/15 p-1 text-white transition-opacity hover:border-[#00FFFF] hover:text-[#00FFFF] ${isHovered ? "opacity-100" : "opacity-0 md:opacity-0"}`}
+                            disabled={isFirstImage || isTransitioning}
+                            className={`absolute left-2 top-1/2 z-20 -translate-y-1/2 bg-black/70 border border-white/15 p-1 text-white transition-opacity ${isHovered ? "opacity-100" : "opacity-0 md:opacity-0"} ${isFirstImage || isTransitioning ? "cursor-not-allowed !opacity-25" : "hover:border-[#00FFFF] hover:text-[#00FFFF]"}`}
                         >
                             <ChevronLeft size={18} />
                         </button>
@@ -205,7 +225,8 @@ const ExperienceCard = ({ exp }) => {
                             type="button"
                             aria-label="Next experience photo"
                             onClick={showNextImage}
-                            className={`absolute right-2 top-1/2 z-20 -translate-y-1/2 bg-black/70 border border-white/15 p-1 text-white transition-opacity hover:border-[#00FFFF] hover:text-[#00FFFF] ${isHovered ? "opacity-100" : "opacity-0 md:opacity-0"}`}
+                            disabled={isLastImage || isTransitioning}
+                            className={`absolute right-2 top-1/2 z-20 -translate-y-1/2 bg-black/70 border border-white/15 p-1 text-white transition-opacity ${isHovered ? "opacity-100" : "opacity-0 md:opacity-0"} ${isLastImage || isTransitioning ? "cursor-not-allowed !opacity-25" : "hover:border-[#00FFFF] hover:text-[#00FFFF]"}`}
                         >
                             <ChevronRight size={18} />
                         </button>
@@ -215,15 +236,8 @@ const ExperienceCard = ({ exp }) => {
                                     key={image}
                                     type="button"
                                     aria-label={`Show experience photo ${index + 1}`}
-                                    onClick={(event) => {
-                                        event.stopPropagation();
-                                        if (index === currentImageIndex) return;
-
-                                        const forwardDistance = (index - currentImageIndex + imageList.length) % imageList.length;
-                                        const backwardDistance = (currentImageIndex - index + imageList.length) % imageList.length;
-                                        setSlideDirection(forwardDistance <= backwardDistance ? 1 : -1);
-                                        setCurrentImageIndex(index);
-                                    }}
+                                    onClick={(event) => showImage(index, event)}
+                                    disabled={isTransitioning}
                                     className={`h-1.5 w-1.5 rounded-full transition-colors ${index === currentImageIndex ? "bg-white" : "bg-white/35"}`}
                                 />
                             ))}
